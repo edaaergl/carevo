@@ -5,13 +5,65 @@
   <title>Carevo</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-  <div class="kutu" style="text-align:center;">
-    <h1>Carevo</h1>
-    <p>Oto yıkama randevu sistemi</p>
-    <a href="musteri-giris.html"><button style="width:100%;">Müşteriyim</button></a>
-    <a href="isletme-giris.html"><button style="width:100%;">İşletmeyim</button></a>
-  </div>
+<body id="anasayfa">
+  <header class="navbar">
+    <div class="logo">🧼 Carevo</div>
+
+    <nav class="nav-linkler">
+      <a href="index.html">Ana Sayfa</a>
+      <a href="#hizmetler">Hizmetler</a>
+      <a href="#nasil-calisir">Nasıl Çalışır</a>
+      <a href="#yorumlar">Yorumlar</a>
+      <a href="#sss">SSS</a>
+    </nav>
+
+    <div class="navbar-sag">
+      <div class="giris-alani" id="giris-alani"></div>
+      <a href="musteri-giris.html" id="randevu-al-link"><button class="btn-beyaz">Randevu Al</button></a>
+    </div>
+  </header>
+
+  <section id="basla" class="hero tam-genislik">
+    <div class="hero-icerik">
+      <span class="rozet">🛡️ Premium Oto Yıkama Platformu</span>
+      <h1>Aracınız İçin <span class="vurgu">Premium</span> Yıkama Deneyimi</h1>
+      <p class="hero-alt">Carevo ile güvenilir oto yıkama işletmelerinden saniyeler içinde online randevu oluşturun. Kaliteli hizmet, kolay randevu.</p>
+
+      <div class="hero-butonlar">
+        <a href="musteri-giris.html"><button class="btn-birincil">📅 Randevu Oluştur</button></a>
+        <a href="#hizmetler"><button class="btn-ikincil">↓ Hizmetleri İncele</button></a>
+      </div>
+
+      <a href="isletme-giris.html" class="isletme-link-kucuk">İşletme sahibi misiniz? Buradan giriş yapın →</a>
+
+      <div class="istatistik-satiri-hero">
+        <div><strong>500+</strong><span>Mutlu Müşteri</span></div>
+        <div><strong>1.200+</strong><span>Tamamlanan Hizmet</span></div>
+        <div><strong>%98</strong><span>Memnuniyet</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="hizmetler" class="bolum tam-genislik">
+    <h2>Hizmetlerimiz</h2>
+    <p>Dış yıkama, iç detaylı temizlik ve motor yıkama gibi hizmetleri bölgenizdeki anlaşmalı işletmeler üzerinden randevulu şekilde alabilirsiniz.</p>
+  </section>
+
+  <section id="nasil-calisir" class="bolum tam-genislik">
+    <h2>Nasıl Çalışır</h2>
+    <p>Üye ol, bölgenizdeki işletmeyi ve hizmeti seçin, size uygun tarih/saati belirleyin — işletme onayladığında randevunuz kesinleşir.</p>
+  </section>
+
+  <section id="yorumlar" class="bolum tam-genislik">
+    <h2>Yorumlar</h2>
+    <p>Müşterilerimizin deneyimlerini yakında burada paylaşacağız.</p>
+  </section>
+
+  <section id="sss" class="bolum tam-genislik">
+    <h2>Sıkça Sorulan Sorular</h2>
+    <p>Randevu iptali, ödeme ve hizmetlerle ilgili sık sorulan soruların cevaplarını yakında burada bulabilirsiniz.</p>
+  </section>
+
+  <script src="js/index.js"></script>
 </body>
 </html>
-

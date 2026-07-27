@@ -47,7 +47,7 @@ input, select {
 button {
   margin-top: 18px;
   padding: 10px 16px;
-  background: #2d6cdf;
+  background: #16233f;
   color: white;
   border: none;
   border-radius: 4px;
@@ -56,7 +56,7 @@ button {
 }
 
 button:hover {
-  background: #1e54b7;
+  background: #0d1626;
 }
 
 .hata {
@@ -87,7 +87,7 @@ th, td {
 }
 
 th {
-  background: #2d6cdf;
+  background: #16233f;
   color: white;
 }
 
@@ -112,3 +112,301 @@ th {
 .gizli {
   display: none;
 }
+
+.tam-genislik {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  box-sizing: border-box;
+}
+
+.hero {
+  position: relative;
+  min-height: 560px;
+  margin-top: -20px;
+  display: flex;
+  align-items: center;
+  background: url("../img/hero.svg") center center / cover no-repeat, #0a1220;
+  background-attachment: fixed;
+  padding: 100px 60px 40px;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 18, 32, 0.55);
+}
+
+.hero-icerik {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  width: 100%;
+  text-align: left;
+}
+
+.hero-icerik h1,
+.hero-icerik p {
+  color: white;
+}
+
+.hero-icerik h1 {
+  font-size: 42px;
+  line-height: 1.2;
+  margin: 0 0 18px;
+}
+
+.vurgu {
+  color: #2f6fed;
+}
+
+.hero-alt {
+  color: #cbd5ea;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 26px;
+}
+
+.rozet {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #cfe0ff;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+.hero-butonlar {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.btn-birincil {
+  margin-top: 0;
+  background: #2f6fed;
+  padding: 12px 26px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.btn-birincil:hover {
+  background: #2559c4;
+}
+
+.btn-ikincil {
+  margin-top: 0;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: white;
+  padding: 12px 26px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.btn-ikincil:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.isletme-link-kucuk {
+  display: block;
+  color: #a9b8d6;
+  font-size: 13px;
+  text-decoration: none;
+  margin-bottom: 36px;
+}
+
+.isletme-link-kucuk:hover {
+  color: white;
+}
+
+.istatistik-satiri-hero {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 24px;
+}
+
+.istatistik-satiri-hero div {
+  display: flex;
+  flex-direction: column;
+}
+
+.istatistik-satiri-hero strong {
+  font-size: 24px;
+  color: white;
+}
+
+.istatistik-satiri-hero span {
+  font-size: 12px;
+  color: #a9b8d6;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: transparent;
+  padding: 16px 40px;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.5px;
+}
+
+.nav-linkler {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.nav-linkler a {
+  color: white;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.nav-linkler a:hover {
+  color: #cfe0ff;
+}
+
+.navbar-sag {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.giris-alani {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.menu-sarmalayici {
+  position: relative;
+}
+
+.giris-yap-btn {
+  margin-top: 0;
+  padding: 10px 24px;
+  border-radius: 24px;
+  box-shadow: 0 4px 12px rgba(22, 35, 63, 0.35);
+}
+
+.hesap-btn {
+  margin-top: 0;
+  background: transparent;
+  border: none;
+  color: white;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.hesap-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #2f6fed;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.btn-beyaz {
+  margin-top: 0;
+  background: white;
+  color: #16233f;
+  padding: 10px 22px;
+  border-radius: 24px;
+  font-weight: bold;
+}
+
+.btn-beyaz:hover {
+  background: #e4e9f4;
+}
+
+.giris-menu .cikis {
+  color: #c0392b;
+}
+
+.bolum {
+  background: white;
+  border-top: 1px solid #e2e5ea;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.bolum h2 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+.bolum p {
+  max-width: 640px;
+  margin: 0 auto;
+  color: #444;
+}
+
+.giris-menu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 8px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  min-width: 170px;
+  z-index: 10;
+}
+
+.giris-menu a {
+  display: block;
+  padding: 12px 16px;
+  color: #222;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.giris-menu a:hover {
+  background: #f4f5f7;
+}
+

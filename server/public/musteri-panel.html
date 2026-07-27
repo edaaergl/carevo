@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Carevo - Randevu Oluştur</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="panel">
+    <div class="ust-bar">
+      <h1 id="musteri-basligi">Merhaba</h1>
+      <button id="cikis-btn">Çıkış Yap</button>
+    </div>
+
+    <div class="kutu" style="margin:0 0 30px 0;">
+      <h1>Yeni Randevu Oluştur</h1>
+
+      <form id="randevu-formu">
+        <label for="isletme-secim">İşletme</label>
+        <select id="isletme-secim" required>
+          <option value="">Seçiniz...</option>
+        </select>
+
+        <label for="hizmet-secim">Hizmet</label>
+        <select id="hizmet-secim" required>
+          <option value="">Önce işletme seçin</option>
+        </select>
+
+        <label for="arac-bilgisi">Araç Marka / Model</label>
+        <input type="text" id="arac-bilgisi" placeholder="Örn. Toyota Corolla" required>
+
+        <label for="konum-turu">Nasıl istersiniz?</label>
+        <select id="konum-turu" required>
+          <option value="dukkan">Ben dükkana gideceğim</option>
+          <option value="musteri_adresi">Ekip bana gelsin</option>
+        </select>
+
+        <div id="adres-alani" class="gizli">
+          <label for="musteri-adresi">Adresiniz</label>
+          <input type="text" id="musteri-adresi">
+        </div>
+
+        <label for="tarih-saat">Tarih / Saat</label>
+        <input type="datetime-local" id="tarih-saat" required>
+
+        <button type="submit">Randevu Oluştur</button>
+      </form>
+
+      <p id="form-mesaji" class="hata gizli"></p>
+    </div>
+
+    <h1>Randevularım</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>İşletme</th>
+          <th>Hizmet</th>
+          <th>Araç</th>
+          <th>Tarih / Saat</th>
+          <th>Konum</th>
+          <th>Ücret</th>
+          <th>Durum</th>
+          <th>Ödeme</th>
+        </tr>
+      </thead>
+      <tbody id="randevu-govde"></tbody>
+    </table>
+    <p id="bos-mesaji" class="gizli">Henüz randevunuz yok.</p>
+  </div>
+
+  <script src="js/musteri-panel.js"></script>
+</body>
+</html>

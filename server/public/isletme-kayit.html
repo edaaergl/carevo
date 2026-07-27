@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Carevo - İşletme Hesabı Oluştur</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="kutu">
+    <h1>İşletme Hesabı Oluştur</h1>
+
+    <form id="kayit-formu">
+      <label for="ad_soyad">Ad Soyad</label>
+      <input type="text" id="ad_soyad" required>
+
+      <label for="email">E-posta</label>
+      <input type="email" id="email" required>
+
+      <label for="telefon">Telefon</label>
+      <input type="text" id="telefon">
+
+      <label for="sifre">Şifre</label>
+      <input type="password" id="sifre" required minlength="6">
+
+      <button type="submit">Hesap Oluştur</button>
+    </form>
+
+    <p id="hata-mesaji" class="hata gizli"></p>
+
+    <p style="margin-top:20px; font-size:13px;">
+      Zaten hesabın var mı? <a href="isletme-giris.html">Giriş yap</a>
+    </p>
+  </div>
+
+  <script src="js/isletme-kayit.js"></script>
+</body>
+</html>

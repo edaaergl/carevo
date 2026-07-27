@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Carevo - Yönetici Girişi</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="kutu">
+    <h1>Yönetici Girişi</h1>
+
+    <form id="giris-formu">
+      <label for="email">E-posta</label>
+      <input type="email" id="email" required>
+
+      <label for="sifre">Şifre</label>
+      <input type="password" id="sifre" required>
+
+      <button type="submit">Giriş Yap</button>
+    </form>
+
+    <p id="hata-mesaji" class="hata gizli"></p>
+  </div>
+
+  <script src="js/admin-giris.js"></script>
+</body>
+</html>

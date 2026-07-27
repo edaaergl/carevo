@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Carevo - Yönetici Paneli</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .istatistik-satiri {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    .istatistik-kart {
+      background: white;
+      padding: 16px 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      flex: 1;
+      min-width: 160px;
+    }
+    .istatistik-kart .sayi {
+      font-size: 24px;
+      font-weight: bold;
+      color: #2d6cdf;
+    }
+    .istatistik-kart .etiket {
+      font-size: 12px;
+      color: #666;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <div class="ust-bar">
+      <h1 id="admin-basligi">Yönetici Paneli</h1>
+      <button id="cikis-btn">Çıkış Yap</button>
+    </div>
+
+    <div class="istatistik-satiri" id="istatistik-satiri"></div>
+
+    <section>
+      <h1>Tüm Randevular</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>İşletme</th>
+            <th>Müşteri</th>
+            <th>Hizmet</th>
+            <th>Araç</th>
+            <th>Tarih / Saat</th>
+            <th>Ücret</th>
+            <th>Durum</th>
+            <th>Ödeme</th>
+            <th>İşlemler</th>
+          </tr>
+        </thead>
+        <tbody id="randevu-govde"></tbody>
+      </table>
+    </section>
+
+    <section>
+      <h1>Tüm İşletmeler</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>İşletme Adı</th>
+            <th>Adres</th>
+            <th>Sahip E-posta</th>
+          </tr>
+        </thead>
+        <tbody id="isletme-govde"></tbody>
+      </table>
+    </section>
+
+    <section>
+      <h1>Tüm Kullanıcılar</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Ad Soyad</th>
+            <th>E-posta</th>
+            <th>Telefon</th>
+            <th>Rol</th>
+            <th>Kayıt Tarihi</th>
+          </tr>
+        </thead>
+        <tbody id="kullanici-govde"></tbody>
+      </table>
+    </section>
+  </div>
+
+  <script src="js/admin-panel.js"></script>
+</body>
+</html>

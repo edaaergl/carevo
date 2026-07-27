@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Carevo - İşletme Paneli</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="panel">
+    <div class="ust-bar">
+      <h1 id="isletme-basligi">İşletme Paneli</h1>
+      <button id="cikis-btn">Çıkış Yap</button>
+    </div>
+
+    <!-- Henuz isletme profili yoksa gosterilecek form -->
+    <div id="profil-olustur-bolumu" class="kutu gizli">
+      <h1>İşletme Profilini Tamamla</h1>
+      <form id="profil-formu">
+        <label for="isletme_adi">İşletme Adı</label>
+        <input type="text" id="isletme_adi" required>
+
+        <label for="adres">Adres</label>
+        <input type="text" id="adres">
+
+        <button type="submit">Profili Oluştur</button>
+      </form>
+    </div>
+
+    <!-- Isletme profili varsa randevu tablosu -->
+    <div id="randevu-bolumu" class="gizli">
+      <table>
+        <thead>
+          <tr>
+            <th>Müşteri</th>
+            <th>Telefon</th>
+            <th>Hizmet</th>
+            <th>Araç</th>
+            <th>Tarih / Saat</th>
+            <th>Konum</th>
+            <th>Ücret</th>
+            <th>Durum</th>
+            <th>Ödeme</th>
+            <th>İşlemler</th>
+          </tr>
+        </thead>
+        <tbody id="randevu-govde"></tbody>
+      </table>
+      <p id="bos-mesaji" class="gizli">Henüz randevu yok.</p>
+    </div>
+  </div>
+
+  <script src="js/isletme-panel.js"></script>
+</body>
+</html>

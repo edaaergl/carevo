@@ -4,28 +4,40 @@
   <meta charset="UTF-8">
   <title>Carevo - İşletme Girişi</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <div class="kutu">
-    <h1>İşletme Girişi</h1>
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0a1220] to-[#16233f] px-4 py-10">
+  <div class="w-full max-w-md">
+    <div class="mb-6 text-center">
+      <a href="index.html" class="text-2xl font-bold text-white">🧼 Carevo</a>
+    </div>
 
-    <form id="giris-formu">
-      <label for="email">E-posta</label>
-      <input type="email" id="email" required>
+    <div class="rounded-2xl border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur-sm">
+      <h1 class="mb-6 text-center text-xl font-bold text-white">İşletme Girişi</h1>
 
-      <label for="sifre">Şifre</label>
-      <input type="password" id="sifre" required>
+      <form id="giris-formu" class="space-y-4">
+        <div>
+          <label for="email" class="mb-1 block text-sm font-medium text-gray-300">E-posta</label>
+          <input type="email" id="email" required class="w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2f6fed]">
+        </div>
 
-      <button type="submit">Giriş Yap</button>
-    </form>
+        <div>
+          <label for="sifre" class="mb-1 block text-sm font-medium text-gray-300">Şifre</label>
+          <input type="password" id="sifre" required class="w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2f6fed]">
+        </div>
 
-    <p id="hata-mesaji" class="hata gizli"></p>
+        <button type="submit" class="w-full rounded-lg bg-[#2f6fed] py-2.5 font-bold text-white transition-all duration-300 hover:scale-[1.02] hover:bg-[#2559c4]">Giriş Yap</button>
+      </form>
 
-    <p style="margin-top:20px; font-size:13px;">
-      Hesabın yok mu? <a href="isletme-kayit.html">İşletme hesabı oluştur</a>
-    </p>
+      <p id="hata-mesaji" class="gizli mt-4 text-sm text-red-400"></p>
+
+      <p class="mt-6 text-center text-sm text-gray-400">
+        Hesabın yok mu? <a href="isletme-kayit.html" class="font-semibold text-blue-300 hover:text-blue-200">İşletme hesabı oluştur</a>
+      </p>
+    </div>
   </div>
 
   <script src="js/isletme-giris.js"></script>
+  <script src="js/whatsapp-widget.js"></script>
 </body>
 </html>

@@ -125,7 +125,7 @@ th {
 
 .hero {
   position: relative;
-  min-height: 560px;
+  min-height: 850px;
   margin-top: -20px;
   display: flex;
   align-items: center;
@@ -265,6 +265,13 @@ th {
   background: transparent;
   padding: 16px 40px;
   z-index: 1000;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar-koyu {
+  background: rgba(10, 18, 32, 0.85);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
 }
 
 .logo {
@@ -311,9 +318,15 @@ th {
 
 .giris-yap-btn {
   margin-top: 0;
-  padding: 10px 24px;
+  background: #2f6fed;
+  padding: 10px 26px;
   border-radius: 24px;
-  box-shadow: 0 4px 12px rgba(22, 35, 63, 0.35);
+  font-weight: bold;
+  box-shadow: 0 4px 16px rgba(47, 111, 237, 0.5);
+}
+
+.giris-yap-btn:hover {
+  background: #2559c4;
 }
 
 .hesap-btn {
@@ -365,24 +378,6 @@ th {
 
 .giris-menu .cikis {
   color: #c0392b;
-}
-
-.bolum {
-  background: white;
-  border-top: 1px solid #e2e5ea;
-  padding: 40px 20px;
-  text-align: center;
-}
-
-.bolum h2 {
-  margin-top: 0;
-  font-size: 20px;
-}
-
-.bolum p {
-  max-width: 640px;
-  margin: 0 auto;
-  color: #444;
 }
 
 .giris-menu {

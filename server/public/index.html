@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Carevo</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body id="anasayfa">
   <header class="navbar">
@@ -44,26 +45,357 @@
     </div>
   </section>
 
-  <section id="hizmetler" class="bolum tam-genislik">
-    <h2>Hizmetlerimiz</h2>
-    <p>Dış yıkama, iç detaylı temizlik ve motor yıkama gibi hizmetleri bölgenizdeki anlaşmalı işletmeler üzerinden randevulu şekilde alabilirsiniz.</p>
+  <section id="hizmetler" class="tam-genislik bg-[#0f1b30] border-t border-white/5 py-16 px-4">
+    <div class="mx-auto max-w-6xl">
+      <div class="flex justify-center mb-4">
+        <span class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-sm font-medium text-blue-200">
+          🧽 Profesyonel Hizmetler
+        </span>
+      </div>
+      <h2 class="text-center text-3xl md:text-4xl font-extrabold text-white mb-3">Aracınız İçin En İyi Bakım</h2>
+      <p class="text-center text-gray-300 max-w-xl mx-auto mb-12">Modern ekipmanlarımız ve uzman ekibimizle aracınıza premium bakım seçenekleri sunuyoruz.</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="group rounded-xl border border-white/10 bg-white/5 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-white/20">
+          <div class="relative h-40 bg-gradient-to-br from-[#16233f] to-[#2f6fed] flex items-center justify-center">
+            <span class="absolute top-3 left-3 flex h-9 w-9 items-center justify-center rounded-lg bg-white shadow text-lg">🚿</span>
+            <span class="text-5xl opacity-90 transition-transform duration-300 group-hover:scale-110">🚿</span>
+          </div>
+          <div class="p-5 text-left">
+            <h3 class="font-bold text-white mb-1">Dış Yıkama</h3>
+            <p class="text-sm text-gray-300 mb-3">Köpük, durulama ve kurutma aşamalarıyla aracınıza özel temizlik hizmeti sunuyoruz.</p>
+            <a href="#" class="text-sm font-semibold text-blue-300 hover:text-blue-200 inline-flex items-center gap-1">Detayları Gör <span class="transition-transform duration-300 group-hover:translate-x-1">→</span></a>
+          </div>
+        </div>
+
+        <div class="group rounded-xl border border-white/10 bg-white/5 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-white/20">
+          <div class="relative h-40 bg-gradient-to-br from-[#16233f] to-[#2f6fed] flex items-center justify-center">
+            <span class="absolute top-3 left-3 flex h-9 w-9 items-center justify-center rounded-lg bg-white shadow text-lg">🧴</span>
+            <span class="text-5xl opacity-90 transition-transform duration-300 group-hover:scale-110">🧴</span>
+          </div>
+          <div class="p-5 text-left">
+            <h3 class="font-bold text-white mb-1">Detaylı İç Temizlik</h3>
+            <p class="text-sm text-gray-300 mb-3">Koltuk, halı ve iç yüzeylerde profesyonel temizlik ve kokulandırma hizmeti.</p>
+            <a href="#" class="text-sm font-semibold text-blue-300 hover:text-blue-200 inline-flex items-center gap-1">Detayları Gör <span class="transition-transform duration-300 group-hover:translate-x-1">→</span></a>
+          </div>
+        </div>
+
+        <div class="group rounded-xl border border-white/10 bg-white/5 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-white/20">
+          <div class="relative h-40 bg-gradient-to-br from-[#16233f] to-[#2f6fed] flex items-center justify-center">
+            <span class="absolute top-3 left-3 flex h-9 w-9 items-center justify-center rounded-lg bg-white shadow text-lg">✨</span>
+            <span class="text-5xl opacity-90 transition-transform duration-300 group-hover:scale-110">✨</span>
+          </div>
+          <div class="p-5 text-left">
+            <h3 class="font-bold text-white mb-1">Cilalama &amp; Parlatma</h3>
+            <p class="text-sm text-gray-300 mb-3">Çizik giderme ve profesyonel cila uygulamasıyla boyanızı parlatıyoruz.</p>
+            <a href="#" class="text-sm font-semibold text-blue-300 hover:text-blue-200 inline-flex items-center gap-1">Detayları Gör <span class="transition-transform duration-300 group-hover:translate-x-1">→</span></a>
+          </div>
+        </div>
+
+        <div class="group rounded-xl border border-white/10 bg-white/5 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-white/20">
+          <div class="relative h-40 bg-gradient-to-br from-[#16233f] to-[#2f6fed] flex items-center justify-center">
+            <span class="absolute top-3 left-3 flex h-9 w-9 items-center justify-center rounded-lg bg-white shadow text-lg">🛡️</span>
+            <span class="text-5xl opacity-90 transition-transform duration-300 group-hover:scale-110">🛡️</span>
+          </div>
+          <div class="p-5 text-left">
+            <h3 class="font-bold text-white mb-1">Seramik Kaplama</h3>
+            <p class="text-sm text-gray-300 mb-3">Nano teknoloji kaplama ile uzun ömürlü boya koruması sağlıyoruz.</p>
+            <a href="#" class="text-sm font-semibold text-blue-300 hover:text-blue-200 inline-flex items-center gap-1">Detayları Gör <span class="transition-transform duration-300 group-hover:translate-x-1">→</span></a>
+          </div>
+        </div>
+
+        <div class="group rounded-xl border border-white/10 bg-white/5 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-white/20">
+          <div class="relative h-40 bg-gradient-to-br from-[#16233f] to-[#2f6fed] flex items-center justify-center">
+            <span class="absolute top-3 left-3 flex h-9 w-9 items-center justify-center rounded-lg bg-white shadow text-lg">⚙️</span>
+            <span class="text-5xl opacity-90 transition-transform duration-300 group-hover:scale-110">⚙️</span>
+          </div>
+          <div class="p-5 text-left">
+            <h3 class="font-bold text-white mb-1">Motor Yıkama</h3>
+            <p class="text-sm text-gray-300 mb-3">Motor bölmesinin güvenli ve detaylı şekilde temizlenmesi.</p>
+            <a href="#" class="text-sm font-semibold text-blue-300 hover:text-blue-200 inline-flex items-center gap-1">Detayları Gör <span class="transition-transform duration-300 group-hover:translate-x-1">→</span></a>
+          </div>
+        </div>
+
+        <div class="group rounded-xl border border-white/10 bg-white/5 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-white/20">
+          <div class="relative h-40 bg-gradient-to-br from-[#16233f] to-[#2f6fed] flex items-center justify-center">
+            <span class="absolute top-3 left-3 flex h-9 w-9 items-center justify-center rounded-lg bg-white shadow text-lg">🛞</span>
+            <span class="text-5xl opacity-90 transition-transform duration-300 group-hover:scale-110">🛞</span>
+          </div>
+          <div class="p-5 text-left">
+            <h3 class="font-bold text-white mb-1">Jant &amp; Lastik Bakımı</h3>
+            <p class="text-sm text-gray-300 mb-3">Jantlarda kir sökücü uygulama ve lastik parlatma hizmeti.</p>
+            <a href="#" class="text-sm font-semibold text-blue-300 hover:text-blue-200 inline-flex items-center gap-1">Detayları Gör <span class="transition-transform duration-300 group-hover:translate-x-1">→</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section id="nasil-calisir" class="bolum tam-genislik">
-    <h2>Nasıl Çalışır</h2>
-    <p>Üye ol, bölgenizdeki işletmeyi ve hizmeti seçin, size uygun tarih/saati belirleyin — işletme onayladığında randevunuz kesinleşir.</p>
+  <section id="nasil-calisir" class="tam-genislik bg-[#16233f] border-t border-white/5 py-16 px-4">
+    <div class="mx-auto max-w-6xl">
+      <div class="flex justify-center mb-4">
+        <span class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-sm font-medium text-emerald-200">
+          ⚡ Kolay ve Hızlı
+        </span>
+      </div>
+      <h2 class="text-center text-3xl md:text-4xl font-extrabold text-white mb-3">Nasıl Çalışır?</h2>
+      <p class="text-center text-gray-300 max-w-xl mx-auto mb-16">Sadece üç adımda randevunuzu oluşturun. Hızlı, güvenli ve pratik.</p>
+
+      <div class="relative grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-6">
+        <div class="hidden sm:block absolute top-8 left-[16.6%] right-[16.6%] h-px bg-white/15"></div>
+
+        <div class="relative text-center">
+          <div class="relative inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-500/20 text-2xl">
+            🧽
+            <span class="absolute -bottom-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white">1</span>
+          </div>
+          <h3 class="mt-4 font-bold text-white">İşletme ve Hizmet Seç</h3>
+          <p class="mt-2 text-sm text-gray-300">Bölgenizdeki işletmeyi ve size uygun hizmeti kolayca seçin. Tüm detaylar açık şekilde listelenir.</p>
+        </div>
+
+        <div class="relative text-center">
+          <div class="relative inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-500/20 text-2xl">
+            📅
+            <span class="absolute -bottom-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full bg-emerald-600 text-xs font-bold text-white">2</span>
+          </div>
+          <h3 class="mt-4 font-bold text-white">Tarih ve Saat Belirle</h3>
+          <p class="mt-2 text-sm text-gray-300">Size uygun tarih ve saati takvim üzerinden seçin. Anlık müsaitlik kontrolü yapılır.</p>
+        </div>
+
+        <div class="relative text-center">
+          <div class="relative inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-amber-500/20 text-2xl">
+            ✅
+            <span class="absolute -bottom-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full bg-amber-600 text-xs font-bold text-white">3</span>
+          </div>
+          <h3 class="mt-4 font-bold text-white">Randevunuzu Oluşturun</h3>
+          <p class="mt-2 text-sm text-gray-300">Araç bilgilerinizi girin ve saniyeler içinde randevunuzu onaylayın. Hemen başlayın!</p>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section id="yorumlar" class="bolum tam-genislik">
-    <h2>Yorumlar</h2>
-    <p>Müşterilerimizin deneyimlerini yakında burada paylaşacağız.</p>
+  <section id="yorumlar" class="tam-genislik bg-[#0f1b30] border-t border-white/5 py-16 px-4">
+    <div class="mx-auto max-w-6xl">
+      <div class="flex justify-center mb-4">
+        <span class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-sm font-medium text-amber-200">
+          💬 Müşteri Memnuniyeti
+        </span>
+      </div>
+      <h2 class="text-center text-3xl md:text-4xl font-extrabold text-white mb-3">Müşterilerimiz Ne Diyor?</h2>
+      <p class="text-center text-gray-300 max-w-xl mx-auto mb-12">Memnun müşterilerimizin deneyimlerini keşfedin.</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="rounded-xl border border-white/10 bg-white/5 p-6 text-left">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="flex h-11 w-11 items-center justify-center rounded-full bg-blue-600 font-bold text-white">A</span>
+            <div>
+              <div class="font-bold text-white text-sm">Ahmet Y.</div>
+              <div class="text-xs text-gray-400">Corolla Sahibi</div>
+            </div>
+          </div>
+          <div class="text-amber-400 text-sm mb-2">★★★★★</div>
+          <p class="text-sm text-gray-300">Dış yıkama hizmetinden çok memnun kaldım, aracım pırıl pırıl oldu. Randevu almak da çok kolaydı.</p>
+        </div>
+
+        <div class="rounded-xl border border-white/10 bg-white/5 p-6 text-left">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="flex h-11 w-11 items-center justify-center rounded-full bg-emerald-600 font-bold text-white">E</span>
+            <div>
+              <div class="font-bold text-white text-sm">Elif K.</div>
+              <div class="text-xs text-gray-400">Civic Sahibi</div>
+            </div>
+          </div>
+          <div class="text-amber-400 text-sm mb-2">★★★★★</div>
+          <p class="text-sm text-gray-300">İç detaylı temizlik harikaydı, koltuklarım yeni gibi oldu. Kesinlikle tekrar tercih edeceğim.</p>
+        </div>
+
+        <div class="rounded-xl border border-white/10 bg-white/5 p-6 text-left">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="flex h-11 w-11 items-center justify-center rounded-full bg-[#2f6fed] font-bold text-white">M</span>
+            <div>
+              <div class="font-bold text-white text-sm">Mehmet D.</div>
+              <div class="text-xs text-gray-400">Passat Sahibi</div>
+            </div>
+          </div>
+          <div class="text-amber-400 text-sm mb-2">★★★★★</div>
+          <p class="text-sm text-gray-300">Online randevu sistemi çok pratik, işletmeyi seçip saniyeler içinde randevu oluşturdum.</p>
+        </div>
+
+        <div class="rounded-xl border border-white/10 bg-white/5 p-6 text-left">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="flex h-11 w-11 items-center justify-center rounded-full bg-rose-500 font-bold text-white">S</span>
+            <div>
+              <div class="font-bold text-white text-sm">Selin Ö.</div>
+              <div class="text-xs text-gray-400">Egea Sahibi</div>
+            </div>
+          </div>
+          <div class="text-amber-400 text-sm mb-2">★★★★★</div>
+          <p class="text-sm text-gray-300">Seramik kaplama sonrası aracım ilk günkü gibi parlıyor. Teşekkürler Carevo!</p>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section id="sss" class="bolum tam-genislik">
-    <h2>Sıkça Sorulan Sorular</h2>
-    <p>Randevu iptali, ödeme ve hizmetlerle ilgili sık sorulan soruların cevaplarını yakında burada bulabilirsiniz.</p>
+  <section id="sss" class="tam-genislik bg-[#16233f] border-t border-white/5 py-16 px-4">
+    <div class="mx-auto max-w-4xl">
+      <div class="flex justify-center mb-4">
+        <span class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-sm font-medium text-gray-200">
+          📖 Yardım Merkezi
+        </span>
+      </div>
+      <h2 class="text-center text-3xl md:text-4xl font-extrabold text-white mb-3">Sık Sorulan Sorular</h2>
+      <p class="text-center text-gray-300 max-w-xl mx-auto mb-10">Aklınıza takılan soruların cevaplarını burada bulabilirsiniz.</p>
+
+      <div class="rounded-xl border border-white/10 divide-y divide-white/10 overflow-hidden">
+        <div>
+          <button type="button" class="sss-baslik flex w-full cursor-pointer items-center justify-between gap-4 p-5 text-left transition-colors hover:bg-white/5">
+            <span class="flex items-center gap-4">
+              <span class="rounded-md bg-blue-500/20 px-2 py-1 text-xs font-bold text-blue-200">01</span>
+              <span class="font-semibold text-white">Randevu oluşturmak için üye olmam gerekli mi?</span>
+            </span>
+            <span class="sss-ok shrink-0 rounded-full border border-white/20 p-1 text-gray-400 transition-transform duration-300">⌄</span>
+          </button>
+          <div class="sss-icerik max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+            <p class="px-5 pb-5 pl-[52px] text-sm text-gray-400">Evet, randevu oluşturabilmek için müşteri hesabınızla giriş yapmanız gerekiyor. Kayıt işlemi sadece birkaç saniye sürer.</p>
+          </div>
+        </div>
+
+        <div>
+          <button type="button" class="sss-baslik flex w-full cursor-pointer items-center justify-between gap-4 p-5 text-left transition-colors hover:bg-white/5">
+            <span class="flex items-center gap-4">
+              <span class="rounded-md bg-blue-500/20 px-2 py-1 text-xs font-bold text-blue-200">02</span>
+              <span class="font-semibold text-white">Hizmet süresi ne kadar sürüyor?</span>
+            </span>
+            <span class="sss-ok shrink-0 rounded-full border border-white/20 p-1 text-gray-400 transition-transform duration-300">⌄</span>
+          </button>
+          <div class="sss-icerik max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+            <p class="px-5 pb-5 pl-[52px] text-sm text-gray-400">Hizmet süresi seçtiğiniz işletmeye ve hizmet türüne göre değişir; tahmini süre randevu oluşturma ekranında belirtilir.</p>
+          </div>
+        </div>
+
+        <div>
+          <button type="button" class="sss-baslik flex w-full cursor-pointer items-center justify-between gap-4 p-5 text-left transition-colors hover:bg-white/5">
+            <span class="flex items-center gap-4">
+              <span class="rounded-md bg-blue-500/20 px-2 py-1 text-xs font-bold text-blue-200">03</span>
+              <span class="font-semibold text-white">Randevumu iptal edebilir veya değiştirebilir miyim?</span>
+            </span>
+            <span class="sss-ok shrink-0 rounded-full border border-white/20 p-1 text-gray-400 transition-transform duration-300">⌄</span>
+          </button>
+          <div class="sss-icerik max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+            <p class="px-5 pb-5 pl-[52px] text-sm text-gray-400">Evet, randevunuzun durumuna göre işletme onayı ile değişiklik veya iptal talep edebilirsiniz.</p>
+          </div>
+        </div>
+
+        <div>
+          <button type="button" class="sss-baslik flex w-full cursor-pointer items-center justify-between gap-4 p-5 text-left transition-colors hover:bg-white/5">
+            <span class="flex items-center gap-4">
+              <span class="rounded-md bg-blue-500/20 px-2 py-1 text-xs font-bold text-blue-200">04</span>
+              <span class="font-semibold text-white">Hangi ödeme yöntemlerini kabul ediyorsunuz?</span>
+            </span>
+            <span class="sss-ok shrink-0 rounded-full border border-white/20 p-1 text-gray-400 transition-transform duration-300">⌄</span>
+          </button>
+          <div class="sss-icerik max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+            <p class="px-5 pb-5 pl-[52px] text-sm text-gray-400">Şu an için ödemeler işletmeyle yüz yüze alınmaktadır; online ödeme seçenekleri yakında eklenecek.</p>
+          </div>
+        </div>
+
+        <div>
+          <button type="button" class="sss-baslik flex w-full cursor-pointer items-center justify-between gap-4 p-5 text-left transition-colors hover:bg-white/5">
+            <span class="flex items-center gap-4">
+              <span class="rounded-md bg-blue-500/20 px-2 py-1 text-xs font-bold text-blue-200">05</span>
+              <span class="font-semibold text-white">Seramik kaplama garantisi var mı?</span>
+            </span>
+            <span class="sss-ok shrink-0 rounded-full border border-white/20 p-1 text-gray-400 transition-transform duration-300">⌄</span>
+          </button>
+          <div class="sss-icerik max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+            <p class="px-5 pb-5 pl-[52px] text-sm text-gray-400">Garanti koşulları hizmeti sunan işletmenin kendi politikasına göre değişir; randevu öncesi işletmeyle görüşmenizi öneririz.</p>
+          </div>
+        </div>
+
+        <div>
+          <button type="button" class="sss-baslik flex w-full cursor-pointer items-center justify-between gap-4 p-5 text-left transition-colors hover:bg-white/5">
+            <span class="flex items-center gap-4">
+              <span class="rounded-md bg-blue-500/20 px-2 py-1 text-xs font-bold text-blue-200">06</span>
+              <span class="font-semibold text-white">İşletme ortaklarınız nasıl seçiliyor?</span>
+            </span>
+            <span class="sss-ok shrink-0 rounded-full border border-white/20 p-1 text-gray-400 transition-transform duration-300">⌄</span>
+          </button>
+          <div class="sss-icerik max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+            <p class="px-5 pb-5 pl-[52px] text-sm text-gray-400">İşletmeler kayıt sırasında sağladıkları bilgilerle platforma katılır; başvurular ekibimiz tarafından değerlendirilir.</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
+
+  <section class="tam-genislik relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#0a1220] to-[#16233f]"></div>
+    <div class="absolute inset-0 bg-black/40"></div>
+    <div class="relative mx-auto max-w-3xl px-4 py-24 text-center">
+      <div class="flex justify-center mb-5">
+        <span class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm text-white">
+          🔧 Hemen Başlayın
+        </span>
+      </div>
+      <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">Aracınıza Hak Ettiği <span class="text-[#2f6fed]">Bakımı</span> Sunun</h2>
+      <p class="text-gray-300 mb-8">Profesyonel işletmelerimiz ve modern ekipmanlarla aracınızı ilk günkü ihtişamına kavuşturun.</p>
+      <a href="musteri-giris.html" class="inline-flex items-center gap-2 rounded-lg bg-[#2f6fed] px-7 py-3 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#2559c4]">
+        📅 Randevu Oluştur
+      </a>
+    </div>
+  </section>
+
+  <footer class="tam-genislik -mb-5 bg-[#0a1220] px-4 pt-16 pb-8 text-gray-300">
+    <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+      <div>
+        <div class="mb-3 text-xl font-bold text-white">🧼 Carevo</div>
+        <p class="mb-4 text-sm text-gray-400">Premium araç bakımında yeni standart. Profesyonel işletme ağımızla aracınız hak ettiği özeni görür.</p>
+        <div class="flex gap-3">
+          <a href="#" class="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white/20">📘</a>
+          <a href="#" class="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white/20">🐦</a>
+          <a href="#" class="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white/20">📷</a>
+          <a href="#" class="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white/20">💼</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="mb-4 text-xs font-bold tracking-wider text-gray-400">HİZMETLER</div>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#hizmetler" class="transition-colors hover:text-white">Dış Yıkama</a></li>
+          <li><a href="#hizmetler" class="transition-colors hover:text-white">Detaylı İç Temizlik</a></li>
+          <li><a href="#hizmetler" class="transition-colors hover:text-white">Seramik Kaplama</a></li>
+          <li><a href="#hizmetler" class="transition-colors hover:text-white">Cilalama &amp; Parlatma</a></li>
+          <li><a href="#hizmetler" class="transition-colors hover:text-white">Motor Yıkama</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="mb-4 text-xs font-bold tracking-wider text-gray-400">KURUMSAL</div>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#" class="transition-colors hover:text-white">Hakkımızda</a></li>
+          <li><a href="#" class="transition-colors hover:text-white">Hizmet Noktaları</a></li>
+          <li><a href="#" class="transition-colors hover:text-white">Kariyer</a></li>
+          <li><a href="#" class="transition-colors hover:text-white">Basında Biz</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="mb-4 text-xs font-bold tracking-wider text-gray-400">DESTEK</div>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#sss" class="transition-colors hover:text-white">SSS</a></li>
+          <li><a href="#" class="transition-colors hover:text-white">İletişim</a></li>
+          <li><a href="#" class="transition-colors hover:text-white">Gizlilik Politikası</a></li>
+          <li><a href="#" class="transition-colors hover:text-white">Kullanım Koşulları</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mx-auto mt-12 max-w-6xl border-t border-white/10 pt-6 text-center text-xs text-gray-500">
+      © 2026 Carevo. Tüm hakları saklıdır.
+    </div>
+  </footer>
 
   <script src="js/index.js"></script>
+  <script src="js/whatsapp-widget.js"></script>
 </body>
 </html>

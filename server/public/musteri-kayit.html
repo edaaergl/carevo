@@ -4,34 +4,50 @@
   <meta charset="UTF-8">
   <title>Carevo - Müşteri Kaydı</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <div class="kutu">
-    <h1>Müşteri Hesabı Oluştur</h1>
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0a1220] to-[#16233f] px-4 py-10">
+  <div class="w-full max-w-md">
+    <div class="mb-6 text-center">
+      <a href="index.html" class="text-2xl font-bold text-white">🧼 Carevo</a>
+    </div>
 
-    <form id="kayit-formu">
-      <label for="ad_soyad">Ad Soyad</label>
-      <input type="text" id="ad_soyad" required>
+    <div class="rounded-2xl border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur-sm">
+      <h1 class="mb-6 text-center text-xl font-bold text-white">Müşteri Hesabı Oluştur</h1>
 
-      <label for="email">E-posta</label>
-      <input type="email" id="email" required>
+      <form id="kayit-formu" class="space-y-4">
+        <div>
+          <label for="ad_soyad" class="mb-1 block text-sm font-medium text-gray-300">Ad Soyad</label>
+          <input type="text" id="ad_soyad" required class="w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2f6fed]">
+        </div>
 
-      <label for="telefon">Telefon</label>
-      <input type="text" id="telefon">
+        <div>
+          <label for="email" class="mb-1 block text-sm font-medium text-gray-300">E-posta</label>
+          <input type="email" id="email" required class="w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2f6fed]">
+        </div>
 
-      <label for="sifre">Şifre</label>
-      <input type="password" id="sifre" required minlength="6">
+        <div>
+          <label for="telefon" class="mb-1 block text-sm font-medium text-gray-300">Telefon</label>
+          <input type="text" id="telefon" class="w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2f6fed]">
+        </div>
 
-      <button type="submit">Hesap Oluştur</button>
-    </form>
+        <div>
+          <label for="sifre" class="mb-1 block text-sm font-medium text-gray-300">Şifre</label>
+          <input type="password" id="sifre" required minlength="6" class="w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2f6fed]">
+        </div>
 
-    <p id="hata-mesaji" class="hata gizli"></p>
+        <button type="submit" class="w-full rounded-lg bg-[#2f6fed] py-2.5 font-bold text-white transition-all duration-300 hover:scale-[1.02] hover:bg-[#2559c4]">Hesap Oluştur</button>
+      </form>
 
-    <p style="margin-top:20px; font-size:13px;">
-      Zaten hesabın var mı? <a href="musteri-giris.html">Giriş yap</a>
-    </p>
+      <p id="hata-mesaji" class="gizli mt-4 text-sm text-red-400"></p>
+
+      <p class="mt-6 text-center text-sm text-gray-400">
+        Zaten hesabın var mı? <a href="musteri-giris.html" class="font-semibold text-blue-300 hover:text-blue-200">Giriş yap</a>
+      </p>
+    </div>
   </div>
 
   <script src="js/musteri-kayit.js"></script>
+  <script src="js/whatsapp-widget.js"></script>
 </body>
 </html>

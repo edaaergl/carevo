@@ -8,7 +8,16 @@ document.getElementById("musteri-basligi").textContent = `Merhaba, ${kullanici.a
 
 document.getElementById("cikis-btn").addEventListener("click", () => {
   localStorage.removeItem("carevo_kullanici");
-  window.location.href = "musteri-giris.html";
+
+  const mesaj = document.createElement("div");
+  mesaj.textContent = "Panelden çıkış yapılmıştır.";
+  mesaj.className =
+    "fixed top-6 left-1/2 -translate-x-1/2 z-[9999] rounded-lg border border-white/10 bg-[#16233f] px-5 py-3 text-sm font-medium text-white shadow-2xl";
+  document.body.appendChild(mesaj);
+
+  setTimeout(() => {
+    window.location.href = "index.html";
+  }, 1200);
 });
 
 // Tum isteklerde token'i otomatik ekleyen yardimci fonksiyon

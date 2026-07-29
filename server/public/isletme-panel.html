@@ -4,9 +4,32 @@
   <meta charset="UTF-8">
   <title>Carevo - İşletme Paneli</title>
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    body { color: #e5e7eb; }
+    .kutu {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: none;
+    }
+    input, select {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+    select option {
+      color: #111;
+    }
+    table {
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: none;
+    }
+    th, td {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+  </style>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="min-h-screen bg-gradient-to-br from-[#0a1220] to-[#16233f]">
   <div class="panel">
     <div class="ust-bar">
       <h1 id="isletme-basligi">İşletme Paneli</h1>
@@ -23,7 +46,7 @@
         <label for="adres">Adres</label>
         <input type="text" id="adres">
 
-        <button type="submit">Profili Oluştur</button>
+        <button type="submit" class="w-full rounded-lg bg-[#2f6fed] py-2.5 font-bold text-white transition-all duration-300 hover:scale-[1.02] hover:bg-[#2559c4]">Profili Oluştur</button>
       </form>
     </div>
 

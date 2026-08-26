@@ -16,7 +16,7 @@ document.getElementById("cikis-btn").addEventListener("click", () => {
   document.body.appendChild(mesaj);
 
   setTimeout(() => {
-    window.location.href = "index.html";
+    window.location.href = "admin-giris.html";
   }, 1200);
 });
 
@@ -63,11 +63,34 @@ let tumRandevular = [];
 async function randevulariYukle() {
   const yanit = await adminFetch("/api/admin/randevular");
   tumRandevular = await yanit.json();
+  randevulariGoster();
+}
+
+function randevulariGoster() {
+  const arama = document.getElementById("randevu-arama").value.trim().toLowerCase();
+  const durumFiltre = document.getElementById("randevu-durum-filtre").value;
+  const baslangic = document.getElementById("randevu-baslangic").value;
+  const bitis = document.getElementById("randevu-bitis").value;
+
+  const filtrelenmis = tumRandevular.filter((r) => {
+    if (durumFiltre && r.durum !== durumFiltre) return false;
+
+    const tarih = r.tarih_saat.slice(0, 10);
+    if (baslangic && tarih < baslangic) return false;
+    if (bitis && tarih > bitis) return false;
+
+    if (!arama) return true;
+    return (
+      r.isletme_adi.toLowerCase().includes(arama) ||
+      r.musteri_adi.toLowerCase().includes(arama) ||
+      r.hizmet_adi.toLowerCase().includes(arama)
+    );
+  });
 
   const govde = document.getElementById("randevu-govde");
   govde.innerHTML = "";
 
-  tumRandevular.forEach((r) => {
+  filtrelenmis.forEach((r) => {
     const satir = document.createElement("tr");
     const tarih = new Date(r.tarih_saat).toLocaleString("tr-TR");
 
@@ -94,6 +117,8 @@ async function randevulariYukle() {
     `;
     govde.appendChild(satir);
   });
+
+  document.getElementById("randevu-bos-mesaji").classList.toggle("gizli", filtrelenmis.length > 0);
 }
 
 let tumIsletmeler = [];
@@ -149,7 +174,13 @@ function kullanicilariGoster() {
         <td>${k.email}</td>
         <td>${k.telefon || "-"}</td>
         <td>${k.rol}</td>
+        <td><span class="durum ${k.aktif ? "durum-aktif" : "durum-pasif"}">${k.aktif ? "Aktif" : "Devre Dışı"}</span></td>
         <td>${new Date(k.olusturulma_tarihi).toLocaleDateString("tr-TR")}</td>
+        <td>
+          <button class="eylem-btn durum-degistir-btn" data-id="${k.id}" data-yeni="${!k.aktif}">
+            ${k.aktif ? "Devre Dışı Bırak" : "Aktif Et"}
+          </button>
+        </td>
       </tr>
     `)
     .join("");
@@ -160,6 +191,10 @@ function kullanicilariGoster() {
 document.getElementById("isletme-arama").addEventListener("input", isletmeleriGoster);
 document.getElementById("kullanici-arama").addEventListener("input", kullanicilariGoster);
 document.getElementById("kullanici-rol-filtre").addEventListener("change", kullanicilariGoster);
+document.getElementById("randevu-arama").addEventListener("input", randevulariGoster);
+document.getElementById("randevu-durum-filtre").addEventListener("change", randevulariGoster);
+document.getElementById("randevu-baslangic").addEventListener("change", randevulariGoster);
+document.getElementById("randevu-bitis").addEventListener("change", randevulariGoster);
 
 // Randevu durumu secimi degistiginde sunucuya bildir
 document.getElementById("randevu-govde").addEventListener("change", async (olay) => {
@@ -281,7 +316,19 @@ document.getElementById("isletme-govde").addEventListener("click", (olay) => {
   isletmeDetayiGoster(Number(satir.dataset.id));
 });
 
-document.getElementById("kullanici-govde").addEventListener("click", (olay) => {
+document.getElementById("kullanici-govde").addEventListener("click", async (olay) => {
+  if (olay.target.matches(".durum-degistir-btn")) {
+    const id = olay.target.dataset.id;
+    const yeniDurum = olay.target.dataset.yeni === "true";
+    await adminFetch(`/api/admin/kullanicilar/${id}/durum`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ aktif: yeniDurum }),
+    });
+    yenile();
+    return;
+  }
+
   const satir = olay.target.closest("tr");
   if (!satir || !satir.dataset.id) return;
   kullaniciDetayiGoster(Number(satir.dataset.id));
@@ -292,8 +339,40 @@ document.getElementById("detay-modal").addEventListener("click", (olay) => {
   if (olay.target.id === "detay-modal") detayModalKapat();
 });
 
+const AY_KISALTMALARI = ["Oca", "Şub", "Mar", "Nis", "May", "Haz", "Tem", "Ağu", "Eyl", "Eki", "Kas", "Ara"];
+
+function sutunGrafikCiz(kapsayiciId, veriler, alanAdi, birim) {
+  const kapsayici = document.getElementById(kapsayiciId);
+  const maksimum = Math.max(1, ...veriler.map((v) => Number(v[alanAdi])));
+
+  kapsayici.innerHTML = veriler
+    .map((v) => {
+      const deger = Number(v[alanAdi]);
+      const yukseklikYuzde = Math.max(2, Math.round((deger / maksimum) * 100));
+      const [yil, ay] = v.ay.split("-");
+      const ayKisa = AY_KISALTMALARI[Number(ay) - 1];
+      return `
+        <div class="grafik-sutun" title="${ayKisa} ${yil}: ${deger}${birim}">
+          <div class="grafik-deger">${deger}</div>
+          <div class="grafik-cubuk" style="height:${yukseklikYuzde}%"></div>
+          <div class="grafik-etiket">${ayKisa}</div>
+        </div>
+      `;
+    })
+    .join("");
+}
+
+async function aylikIstatistikleriYukle() {
+  const yanit = await adminFetch("/api/admin/istatistikler/aylik");
+  const aylikVeri = await yanit.json();
+
+  sutunGrafikCiz("grafik-randevu", aylikVeri, "randevu_sayisi", "");
+  sutunGrafikCiz("grafik-tahsilat", aylikVeri, "tahsilat", " TL");
+}
+
 function yenile() {
   istatistikleriYukle();
+  aylikIstatistikleriYukle();
   randevulariYukle();
   isletmeleriYukle();
   kullanicilariYukle();

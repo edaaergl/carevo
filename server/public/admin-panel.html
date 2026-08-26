@@ -64,6 +64,64 @@
     #kullanici-govde tr[data-id]:hover {
       background: rgba(255, 255, 255, 0.08);
     }
+    .durum-aktif { background: #27ae60; }
+    .durum-pasif { background: #c0392b; }
+    .grafik-satiri {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .grafik-kart {
+      flex: 1;
+      min-width: 280px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 16px 20px 12px;
+    }
+    .grafik-baslik {
+      font-size: 13px;
+      font-weight: 600;
+      color: #9ca3af;
+      margin: 0 0 18px;
+    }
+    .grafik-govde {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      height: 150px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .grafik-sutun {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      height: 100%;
+      cursor: default;
+    }
+    .grafik-deger {
+      font-size: 11px;
+      color: #e5e7eb;
+      margin-bottom: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+    .grafik-cubuk {
+      width: 100%;
+      max-width: 24px;
+      background: #3987e5;
+      border-radius: 4px 4px 0 0;
+      transition: opacity 0.15s;
+    }
+    .grafik-sutun:hover .grafik-cubuk {
+      opacity: 0.75;
+    }
+    .grafik-etiket {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 6px;
+    }
   </style>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -77,7 +135,33 @@
     <div class="istatistik-satiri" id="istatistik-satiri"></div>
 
     <section>
+      <h1>Aylık İstatistikler</h1>
+      <div class="grafik-satiri">
+        <div class="grafik-kart">
+          <h3 class="grafik-baslik">Randevu Sayısı (Son 6 Ay)</h3>
+          <div class="grafik-govde" id="grafik-randevu"></div>
+        </div>
+        <div class="grafik-kart">
+          <h3 class="grafik-baslik">Tahsilat - TL (Son 6 Ay)</h3>
+          <div class="grafik-govde" id="grafik-tahsilat"></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
       <h1>Tüm Randevular</h1>
+      <div style="display:flex; gap:10px; margin-bottom:14px; flex-wrap:wrap;">
+        <input type="text" id="randevu-arama" placeholder="İşletme, müşteri veya hizmet ara..." style="flex:1; min-width:220px;">
+        <select id="randevu-durum-filtre" style="max-width:180px;">
+          <option value="">Tüm durumlar</option>
+          <option value="beklemede">Beklemede</option>
+          <option value="onaylandi">Onaylandı</option>
+          <option value="iptal">İptal</option>
+          <option value="tamamlandi">Tamamlandı</option>
+        </select>
+        <input type="date" id="randevu-baslangic" style="max-width:160px;">
+        <input type="date" id="randevu-bitis" style="max-width:160px;">
+      </div>
       <table>
         <thead>
           <tr>
@@ -94,6 +178,7 @@
         </thead>
         <tbody id="randevu-govde"></tbody>
       </table>
+      <p id="randevu-bos-mesaji" class="gizli" style="margin-top:10px; font-size:13px; color:#9ca3af;">Aramanla eşleşen randevu bulunamadı.</p>
     </section>
 
     <section>
@@ -129,7 +214,9 @@
             <th>E-posta</th>
             <th>Telefon</th>
             <th>Rol</th>
+            <th>Durum</th>
             <th>Kayıt Tarihi</th>
+            <th>İşlemler</th>
           </tr>
         </thead>
         <tbody id="kullanici-govde"></tbody>

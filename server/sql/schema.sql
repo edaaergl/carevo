@@ -7,6 +7,7 @@ CREATE TABLE kullanicilar (
     sifre_hash      VARCHAR(255) NOT NULL,
     telefon         VARCHAR(20),
     rol             VARCHAR(20) NOT NULL CHECK (rol IN ('musteri', 'isletme', 'admin')),
+    aktif           BOOLEAN NOT NULL DEFAULT true,
     olusturulma_tarihi TIMESTAMP NOT NULL DEFAULT NOW()
 );
 

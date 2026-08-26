@@ -61,6 +61,10 @@ router.post("/giris", async (req, res) => {
       return res.status(401).json({ hata: "Email veya sifre hatali" });
     }
 
+    if (!kullanici.aktif) {
+      return res.status(403).json({ hata: "Hesabiniz devre disi birakilmis" });
+    }
+
     // Token, kullanicinin kim oldugunu (id, rol) imzali bir sekilde tasir.
     // Sunucu bunu JWT_SECRET ile imzaladigi icin, biri token icerigini
     // degistirmeye calisirsa (ornegin rol'u "admin" yapmaya) imza gecersiz olur.

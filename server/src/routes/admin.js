@@ -48,12 +48,35 @@ router.get("/isletmeler", async (req, res) => {
 router.get("/kullanicilar", async (req, res) => {
   try {
     const sonuc = await pool.query(
-      `SELECT id, ad_soyad, email, telefon, rol, olusturulma_tarihi
+      `SELECT id, ad_soyad, email, telefon, rol, aktif, olusturulma_tarihi
        FROM kullanicilar
        WHERE rol != 'admin'
        ORDER BY olusturulma_tarihi DESC`
     );
     res.json(sonuc.rows);
+  } catch (hata) {
+    console.error(hata);
+    res.status(500).json({ hata: "Sunucu hatasi" });
+  }
+});
+
+// Bir kullaniciyi aktif/pasif yap (hesap devre disi birakma)
+router.patch("/kullanicilar/:id/durum", async (req, res) => {
+  const { aktif } = req.body;
+  if (typeof aktif !== "boolean") {
+    return res.status(400).json({ hata: "aktif alani boolean olmalidir" });
+  }
+
+  try {
+    const sonuc = await pool.query(
+      `UPDATE kullanicilar SET aktif = $1 WHERE id = $2 AND rol != 'admin'
+       RETURNING id, ad_soyad, email, telefon, rol, aktif, olusturulma_tarihi`,
+      [aktif, req.params.id]
+    );
+    if (!sonuc.rows[0]) {
+      return res.status(404).json({ hata: "Kullanici bulunamadi" });
+    }
+    res.json(sonuc.rows[0]);
   } catch (hata) {
     console.error(hata);
     res.status(500).json({ hata: "Sunucu hatasi" });
@@ -72,6 +95,36 @@ router.get("/istatistikler", async (req, res) => {
         (SELECT COALESCE(SUM(ucret), 0) FROM randevular WHERE odeme_durumu = 'odenmedi') AS bekleyen_tahsilat
     `);
     res.json(sonuc.rows[0]);
+  } catch (hata) {
+    console.error(hata);
+    res.status(500).json({ hata: "Sunucu hatasi" });
+  }
+});
+
+// Son 6 ayin randevu sayisi ve tahsilati (grafik icin)
+router.get("/istatistikler/aylik", async (req, res) => {
+  try {
+    const sonuc = await pool.query(`
+      SELECT
+        to_char(gs.ay, 'YYYY-MM') AS ay,
+        COALESCE(r.randevu_sayisi, 0) AS randevu_sayisi,
+        COALESCE(r.tahsilat, 0) AS tahsilat
+      FROM generate_series(
+        date_trunc('month', NOW()) - INTERVAL '5 months',
+        date_trunc('month', NOW()),
+        INTERVAL '1 month'
+      ) AS gs(ay)
+      LEFT JOIN (
+        SELECT
+          date_trunc('month', tarih_saat) AS ay,
+          COUNT(*) AS randevu_sayisi,
+          COALESCE(SUM(ucret) FILTER (WHERE odeme_durumu = 'odendi'), 0) AS tahsilat
+        FROM randevular
+        GROUP BY date_trunc('month', tarih_saat)
+      ) r ON r.ay = gs.ay
+      ORDER BY gs.ay
+    `);
+    res.json(sonuc.rows);
   } catch (hata) {
     console.error(hata);
     res.status(500).json({ hata: "Sunucu hatasi" });

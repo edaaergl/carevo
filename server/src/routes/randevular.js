@@ -131,4 +131,29 @@ router.patch("/:id/durum", rolGerekli("isletme"), async (req, res) => {
   }
 });
 
+// Musteri kendi randevusunu iptal eder
+router.patch("/:id/iptal", rolGerekli("musteri"), async (req, res) => {
+  try {
+    const randevu = await pool.query(
+      "SELECT id, durum FROM randevular WHERE id = $1 AND musteri_id = $2",
+      [req.params.id, req.kullanici.id]
+    );
+    if (!randevu.rows[0]) {
+      return res.status(403).json({ hata: "Bu randevu size ait degil" });
+    }
+    if (["iptal", "tamamlandi"].includes(randevu.rows[0].durum)) {
+      return res.status(400).json({ hata: "Bu randevu artik iptal edilemez" });
+    }
+
+    const sonuc = await pool.query(
+      "UPDATE randevular SET durum = 'iptal' WHERE id = $1 RETURNING *",
+      [req.params.id]
+    );
+    res.json(sonuc.rows[0]);
+  } catch (hata) {
+    console.error(hata);
+    res.status(500).json({ hata: "Sunucu hatasi" });
+  }
+});
+
 module.exports = router;

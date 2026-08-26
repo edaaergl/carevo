@@ -136,6 +136,8 @@ async function randevulariYukle() {
     const tarih = new Date(r.tarih_saat).toLocaleString("tr-TR");
     const konumMetni = r.konum_turu === "musteri_adresi" ? "Ekip Gelecek" : "Dükkana Gideceğim";
 
+    const iptalEdilebilir = !["iptal", "tamamlandi"].includes(r.durum);
+
     satir.innerHTML = `
       <td>${r.isletme_adi}</td>
       <td>${r.hizmet_adi}</td>
@@ -145,10 +147,23 @@ async function randevulariYukle() {
       <td>${r.ucret} TL</td>
       <td><span class="durum durum-${r.durum}">${r.durum}</span></td>
       <td>${r.odeme_durumu}</td>
+      <td>${iptalEdilebilir ? `<button class="eylem-btn randevu-iptal-btn" data-id="${r.id}">İptal Et</button>` : "-"}</td>
     `;
     govde.appendChild(satir);
   });
 }
+
+// Randevu iptal butonu (event delegation)
+document.getElementById("randevu-govde").addEventListener("click", async (olay) => {
+  if (!olay.target.matches(".randevu-iptal-btn")) return;
+  if (!confirm("Bu randevuyu iptal etmek istediğinize emin misiniz?")) return;
+
+  await korumaliFetch(`/api/randevular/${olay.target.dataset.id}/iptal`, {
+    method: "PATCH",
+  });
+
+  randevulariYukle();
+});
 
 isletmeleriYukle();
 randevulariYukle();

@@ -52,8 +52,61 @@ async function baslat() {
   isletme = await yanit.json();
   document.getElementById("isletme-basligi").textContent = isletme.isletme_adi;
   document.getElementById("randevu-bolumu").classList.remove("gizli");
+  hizmetleriYukle();
   randevulariYukle();
 }
+
+async function hizmetleriYukle() {
+  const yanit = await korumaliFetch(`/api/isletmeler/${isletme.id}/hizmetler`);
+  const hizmetler = await yanit.json();
+
+  const govde = document.getElementById("hizmet-govde");
+  govde.innerHTML = hizmetler
+    .map(
+      (h) => `
+      <tr data-id="${h.id}">
+        <td>${h.ad}</td>
+        <td>${h.fiyat} TL</td>
+        <td>${h.tahmini_sure_dk ? h.tahmini_sure_dk + " dk" : "-"}</td>
+        <td><button class="eylem-btn hizmet-sil-btn" data-id="${h.id}">Sil</button></td>
+      </tr>
+    `
+    )
+    .join("");
+
+  document.getElementById("hizmet-bos-mesaji").classList.toggle("gizli", hizmetler.length > 0);
+}
+
+// Yeni hizmet ekleme formu
+document.getElementById("hizmet-formu").addEventListener("submit", async (olay) => {
+  olay.preventDefault();
+
+  await korumaliFetch(`/api/isletmeler/${isletme.id}/hizmetler`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      ad: document.getElementById("hizmet-ad").value,
+      fiyat: Number(document.getElementById("hizmet-fiyat").value),
+      tahmini_sure_dk: document.getElementById("hizmet-sure").value
+        ? Number(document.getElementById("hizmet-sure").value)
+        : null,
+    }),
+  });
+
+  document.getElementById("hizmet-formu").reset();
+  hizmetleriYukle();
+});
+
+// Hizmet silme (event delegation)
+document.getElementById("hizmet-govde").addEventListener("click", async (olay) => {
+  if (!olay.target.matches(".hizmet-sil-btn")) return;
+
+  await korumaliFetch(`/api/isletmeler/${isletme.id}/hizmetler/${olay.target.dataset.id}`, {
+    method: "DELETE",
+  });
+
+  hizmetleriYukle();
+});
 
 // Profil olusturma formu (isletme ilk kez giris yaptiginda)
 document.getElementById("profil-formu").addEventListener("submit", async (olay) => {

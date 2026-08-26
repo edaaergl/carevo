@@ -105,4 +105,29 @@ router.post("/:id/hizmetler", rolGerekli("isletme"), async (req, res) => {
   }
 });
 
+// Isletmenin bir hizmetini sil (sadece o isletmenin sahibi)
+router.delete("/:id/hizmetler/:hizmetId", rolGerekli("isletme"), async (req, res) => {
+  try {
+    const sahiplik = await pool.query(
+      "SELECT id FROM isletmeler WHERE id = $1 AND kullanici_id = $2",
+      [req.params.id, req.kullanici.id]
+    );
+    if (!sahiplik.rows[0]) {
+      return res.status(403).json({ hata: "Bu isletme size ait degil" });
+    }
+
+    const sonuc = await pool.query(
+      "DELETE FROM hizmetler WHERE id = $1 AND isletme_id = $2 RETURNING id",
+      [req.params.hizmetId, req.params.id]
+    );
+    if (!sonuc.rows[0]) {
+      return res.status(404).json({ hata: "Hizmet bulunamadi" });
+    }
+    res.status(204).send();
+  } catch (hata) {
+    console.error(hata);
+    res.status(500).json({ hata: "Sunucu hatasi" });
+  }
+});
+
 module.exports = router;

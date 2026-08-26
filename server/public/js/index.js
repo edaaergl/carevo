@@ -1,4 +1,7 @@
-const kullanici = JSON.parse(localStorage.getItem("carevo_kullanici") || "null");
+// Her rol kendi anahtarina kaydedildigi icin (farkli sekmeler birbirini
+// bozmasin diye), burada en son giris yapilan role bakip onu okuyoruz
+const sonRol = localStorage.getItem("carevo_son_rol");
+const kullanici = sonRol ? JSON.parse(localStorage.getItem(`carevo_kullanici_${sonRol}`) || "null") : null;
 
 const girisAlani = document.getElementById("giris-alani");
 const randevuAlLink = document.getElementById("randevu-al-link");
@@ -19,7 +22,7 @@ if (kullanici && kullanici.token) {
   girisAlani.innerHTML = `
     <div class="menu-sarmalayici">
       <button id="hesap-btn" class="hesap-btn">
-        <span class="avatar">${ilkHarf}</span> ${kullanici.ad_soyad} <span class="ok">⌄</span>
+        <span class="avatar">${kacir(ilkHarf)}</span> ${kacir(kullanici.ad_soyad)} <span class="ok">⌄</span>
       </button>
       <div id="hesap-menu" class="giris-menu gizli">
         <a href="${panelSayfasi[kullanici.rol]}">📊 Panelim</a>
@@ -42,7 +45,8 @@ if (kullanici && kullanici.token) {
 
   document.getElementById("cikis-yap-link").addEventListener("click", (olay) => {
     olay.preventDefault();
-    localStorage.removeItem("carevo_kullanici");
+    localStorage.removeItem(`carevo_kullanici_${kullanici.rol}`);
+    localStorage.removeItem("carevo_son_rol");
     window.location.reload();
   });
 

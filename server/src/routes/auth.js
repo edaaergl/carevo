@@ -1,9 +1,19 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const rateLimit = require("express-rate-limit");
 const pool = require("../db");
 
 const router = express.Router();
+
+// Ayni IP'den 15 dakikada en fazla 10 giris denemesi - brute-force koruma
+const girisSinirlayici = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { hata: "Cok fazla giris denemesi yapildi, lutfen daha sonra tekrar deneyin" },
+});
 
 // Kayıt ol
 router.post("/kayit", async (req, res) => {
@@ -14,6 +24,9 @@ router.post("/kayit", async (req, res) => {
   }
   if (!["musteri", "isletme"].includes(rol)) {
     return res.status(400).json({ hata: "rol 'musteri' veya 'isletme' olmalidir" });
+  }
+  if (sifre.length < 6) {
+    return res.status(400).json({ hata: "sifre en az 6 karakter olmalidir" });
   }
 
   try {
@@ -38,7 +51,7 @@ router.post("/kayit", async (req, res) => {
 });
 
 // Giriş yap
-router.post("/giris", async (req, res) => {
+router.post("/giris", girisSinirlayici, async (req, res) => {
   const { email, sifre } = req.body;
 
   if (!email || !sifre) {

@@ -22,18 +22,37 @@ router.post("/", rolGerekli("musteri"), async (req, res) => {
   if (konum_turu === "musteri_adresi" && !musteri_adresi) {
     return res.status(400).json({ hata: "konum_turu 'musteri_adresi' ise musteri_adresi zorunludur" });
   }
+  if (new Date(tarih_saat) < new Date()) {
+    return res.status(400).json({ hata: "Gecmis bir tarihe randevu olusturulamaz" });
+  }
 
   try {
-    // Fiyati client'tan degil, veritabanindaki hizmet kaydindan aliyoruz
+    // Fiyati ve sureyi client'tan degil, veritabanindaki hizmet kaydindan aliyoruz
     // (musteri tarafi ucreti degistiremesin diye)
     const hizmet = await pool.query(
-      "SELECT fiyat FROM hizmetler WHERE id = $1 AND isletme_id = $2",
+      "SELECT fiyat, tahmini_sure_dk FROM hizmetler WHERE id = $1 AND isletme_id = $2",
       [hizmet_id, isletme_id]
     );
     if (!hizmet.rows[0]) {
       return res.status(400).json({ hata: "Bu isletmede boyle bir hizmet bulunamadi" });
     }
     const ucret = hizmet.rows[0].fiyat;
+    const yeniSureDk = hizmet.rows[0].tahmini_sure_dk || 60;
+
+    // Ayni isletmede zaman araligi cakisan (durumu iptal olmayan) baska randevu var mi kontrol et
+    const cakisma = await pool.query(
+      `SELECT r.id FROM randevular r
+       JOIN hizmetler h ON h.id = r.hizmet_id
+       WHERE r.isletme_id = $1
+         AND r.durum != 'iptal'
+         AND (r.tarih_saat, (r.tarih_saat + (COALESCE(h.tahmini_sure_dk, 60) || ' minutes')::interval))
+             OVERLAPS
+             ($2::timestamp, ($2::timestamp + ($3 || ' minutes')::interval))`,
+      [isletme_id, tarih_saat, yeniSureDk]
+    );
+    if (cakisma.rows[0]) {
+      return res.status(409).json({ hata: "Bu isletmede secilen saat araliginda baska bir randevu var" });
+    }
 
     // musteri_id'yi body'den degil, token'dan aliyoruz -
     // yoksa biri baska bir musteri adina randevu olusturabilirdi

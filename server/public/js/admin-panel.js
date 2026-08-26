@@ -1,4 +1,4 @@
-const kullanici = JSON.parse(localStorage.getItem("carevo_kullanici") || "null");
+const kullanici = JSON.parse(localStorage.getItem("carevo_kullanici_admin") || "null");
 
 if (!kullanici || kullanici.rol !== "admin" || !kullanici.token) {
   window.location.href = "admin-giris.html";
@@ -7,7 +7,7 @@ if (!kullanici || kullanici.rol !== "admin" || !kullanici.token) {
 document.getElementById("admin-basligi").textContent = `Yönetici Paneli - ${kullanici.ad_soyad}`;
 
 document.getElementById("cikis-btn").addEventListener("click", () => {
-  localStorage.removeItem("carevo_kullanici");
+  localStorage.removeItem("carevo_kullanici_admin");
 
   const mesaj = document.createElement("div");
   mesaj.textContent = "Panelden çıkış yapılmıştır.";
@@ -32,7 +32,7 @@ async function adminFetch(url, secenekler = {}) {
 
   if (yanit.status === 401 || yanit.status === 403) {
     // token gecersiz/suresi dolmus, tekrar giris yaptir
-    localStorage.removeItem("carevo_kullanici");
+    localStorage.removeItem("carevo_kullanici_admin");
     window.location.href = "admin-giris.html";
     throw new Error("Yetkisiz");
   }
@@ -95,10 +95,10 @@ function randevulariGoster() {
     const tarih = new Date(r.tarih_saat).toLocaleString("tr-TR");
 
     satir.innerHTML = `
-      <td>${r.isletme_adi}</td>
-      <td>${r.musteri_adi}</td>
-      <td>${r.hizmet_adi}</td>
-      <td>${r.arac_bilgisi}</td>
+      <td>${kacir(r.isletme_adi)}</td>
+      <td>${kacir(r.musteri_adi)}</td>
+      <td>${kacir(r.hizmet_adi)}</td>
+      <td>${kacir(r.arac_bilgisi)}</td>
       <td>${tarih}</td>
       <td>${r.ucret} TL</td>
       <td><span class="durum durum-${r.durum}">${r.durum}</span></td>
@@ -144,7 +144,7 @@ function isletmeleriGoster() {
 
   const govde = document.getElementById("isletme-govde");
   govde.innerHTML = filtrelenmis
-    .map((i) => `<tr data-id="${i.id}"><td>${i.isletme_adi}</td><td>${i.adres || "-"}</td><td>${i.sahip_email}</td></tr>`)
+    .map((i) => `<tr data-id="${i.id}"><td>${kacir(i.isletme_adi)}</td><td>${kacir(i.adres) || "-"}</td><td>${kacir(i.sahip_email)}</td></tr>`)
     .join("");
 
   document.getElementById("isletme-bos-mesaji").classList.toggle("gizli", filtrelenmis.length > 0);
@@ -170,9 +170,9 @@ function kullanicilariGoster() {
   govde.innerHTML = filtrelenmis
     .map((k) => `
       <tr data-id="${k.id}">
-        <td>${k.ad_soyad}</td>
-        <td>${k.email}</td>
-        <td>${k.telefon || "-"}</td>
+        <td>${kacir(k.ad_soyad)}</td>
+        <td>${kacir(k.email)}</td>
+        <td>${kacir(k.telefon) || "-"}</td>
         <td>${k.rol}</td>
         <td><span class="durum ${k.aktif ? "durum-aktif" : "durum-pasif"}">${k.aktif ? "Aktif" : "Devre Dışı"}</span></td>
         <td>${new Date(k.olusturulma_tarihi).toLocaleDateString("tr-TR")}</td>
@@ -180,6 +180,7 @@ function kullanicilariGoster() {
           <button class="eylem-btn durum-degistir-btn" data-id="${k.id}" data-yeni="${!k.aktif}">
             ${k.aktif ? "Devre Dışı Bırak" : "Aktif Et"}
           </button>
+          <button class="eylem-btn sifre-sifirla-btn" data-id="${k.id}">Şifre Sıfırla</button>
         </td>
       </tr>
     `)
@@ -234,16 +235,16 @@ async function isletmeDetayiGoster(id) {
 
   document.getElementById("detay-baslik").textContent = isletme.isletme_adi;
   document.getElementById("detay-icerik").innerHTML = `
-    <p class="mb-1"><strong class="text-white">Adres:</strong> ${isletme.adres || "-"}</p>
-    <p class="mb-1"><strong class="text-white">Açıklama:</strong> ${isletme.aciklama || "-"}</p>
-    <p class="mb-4"><strong class="text-white">Sahip E-posta:</strong> ${isletme.sahip_email}</p>
+    <p class="mb-1"><strong class="text-white">Adres:</strong> ${kacir(isletme.adres) || "-"}</p>
+    <p class="mb-1"><strong class="text-white">Açıklama:</strong> ${kacir(isletme.aciklama) || "-"}</p>
+    <p class="mb-4"><strong class="text-white">Sahip E-posta:</strong> ${kacir(isletme.sahip_email)}</p>
 
     <h3 class="mb-2 mt-4 font-bold text-white">Hizmetler (${hizmetler.length})</h3>
     ${
       hizmetler.length === 0
         ? '<p class="mb-4 text-xs text-gray-400">Henüz hizmet eklenmemiş.</p>'
         : `<ul class="mb-4 space-y-1">${hizmetler
-            .map((h) => `<li>• ${h.ad} — ${h.fiyat} TL${h.tahmini_sure_dk ? ` (${h.tahmini_sure_dk} dk)` : ""}</li>`)
+            .map((h) => `<li>• ${kacir(h.ad)} — ${h.fiyat} TL${h.tahmini_sure_dk ? ` (${h.tahmini_sure_dk} dk)` : ""}</li>`)
             .join("")}</ul>`
     }
 
@@ -255,8 +256,8 @@ async function isletmeDetayiGoster(id) {
             .map(
               (r) => `
               <div class="rounded-md border border-white/10 p-2 text-xs">
-                <div class="flex justify-between"><span>${r.musteri_adi}</span><span class="durum durum-${r.durum}">${r.durum}</span></div>
-                <div class="mt-1 text-gray-400">${r.hizmet_adi} · ${new Date(r.tarih_saat).toLocaleString("tr-TR")} · ${r.ucret} TL</div>
+                <div class="flex justify-between"><span>${kacir(r.musteri_adi)}</span><span class="durum durum-${r.durum}">${r.durum}</span></div>
+                <div class="mt-1 text-gray-400">${kacir(r.hizmet_adi)} · ${new Date(r.tarih_saat).toLocaleString("tr-TR")} · ${r.ucret} TL</div>
               </div>`
             )
             .join("")}</div>`
@@ -274,8 +275,8 @@ function kullaniciDetayiGoster(id) {
 
   document.getElementById("detay-baslik").textContent = kullaniciKaydi.ad_soyad;
   document.getElementById("detay-icerik").innerHTML = `
-    <p class="mb-1"><strong class="text-white">E-posta:</strong> ${kullaniciKaydi.email}</p>
-    <p class="mb-1"><strong class="text-white">Telefon:</strong> ${kullaniciKaydi.telefon || "-"}</p>
+    <p class="mb-1"><strong class="text-white">E-posta:</strong> ${kacir(kullaniciKaydi.email)}</p>
+    <p class="mb-1"><strong class="text-white">Telefon:</strong> ${kacir(kullaniciKaydi.telefon) || "-"}</p>
     <p class="mb-1"><strong class="text-white">Rol:</strong> ${kullaniciKaydi.rol}</p>
     <p class="mb-4"><strong class="text-white">Kayıt Tarihi:</strong> ${new Date(kullaniciKaydi.olusturulma_tarihi).toLocaleDateString("tr-TR")}</p>
 
@@ -287,8 +288,8 @@ function kullaniciDetayiGoster(id) {
             .map(
               (r) => `
               <div class="rounded-md border border-white/10 p-2 text-xs">
-                <div class="flex justify-between"><span>${r.isletme_adi}</span><span class="durum durum-${r.durum}">${r.durum}</span></div>
-                <div class="mt-1 text-gray-400">${r.hizmet_adi} · ${new Date(r.tarih_saat).toLocaleString("tr-TR")} · ${r.ucret} TL</div>
+                <div class="flex justify-between"><span>${kacir(r.isletme_adi)}</span><span class="durum durum-${r.durum}">${r.durum}</span></div>
+                <div class="mt-1 text-gray-400">${kacir(r.hizmet_adi)} · ${new Date(r.tarih_saat).toLocaleString("tr-TR")} · ${r.ucret} TL</div>
               </div>`
             )
             .join("")}</div>`
@@ -326,6 +327,26 @@ document.getElementById("kullanici-govde").addEventListener("click", async (olay
       body: JSON.stringify({ aktif: yeniDurum }),
     });
     yenile();
+    return;
+  }
+
+  if (olay.target.matches(".sifre-sifirla-btn")) {
+    const id = olay.target.dataset.id;
+    const yeniSifre = prompt("Kullanici icin yeni sifre girin (en az 6 karakter):");
+    if (!yeniSifre) return;
+
+    const yanit = await adminFetch(`/api/admin/kullanicilar/${id}/sifre`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ sifre: yeniSifre }),
+    });
+
+    const sonuc = await yanit.json();
+    if (!yanit.ok) {
+      alert(sonuc.hata || "Sifre sifirlanamadi");
+      return;
+    }
+    alert("Sifre basariyla sifirlandi.");
     return;
   }
 

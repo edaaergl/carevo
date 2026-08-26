@@ -1,5 +1,4 @@
 const express = require("express");
-const cors = require("cors");
 const path = require("path");
 const pool = require("./db");
 require("dotenv").config();
@@ -10,7 +9,8 @@ const randevularRoutes = require("./routes/randevular");
 const adminRoutes = require("./routes/admin");
 
 const app = express();
-app.use(cors());
+// Frontend hep ayni origin'den (bu sunucudan) relative istekler attigi icin
+// cross-origin erisime izin vermeye gerek yok - CORS acmiyoruz.
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "..", "public")));
 

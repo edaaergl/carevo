@@ -30,7 +30,10 @@ form.addEventListener("submit", async (olay) => {
       return;
     }
 
-    localStorage.setItem("carevo_kullanici", JSON.stringify(kullanici));
+    // Rol'e ozel anahtar kullaniyoruz ki farkli rollerle ayni tarayicida
+    // acilan farkli sekmeler birbirinin oturumunu silmesin
+    localStorage.setItem("carevo_kullanici_musteri", JSON.stringify(kullanici));
+    localStorage.setItem("carevo_son_rol", "musteri");
     window.location.href = "musteri-panel.html";
   } catch (hata) {
     hataMesaji.textContent = "Sunucuya baglanilamadi";

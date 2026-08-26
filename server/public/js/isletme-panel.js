@@ -1,4 +1,4 @@
-const kullanici = JSON.parse(localStorage.getItem("carevo_kullanici") || "null");
+const kullanici = JSON.parse(localStorage.getItem("carevo_kullanici_isletme") || "null");
 
 if (!kullanici || kullanici.rol !== "isletme" || !kullanici.token) {
   window.location.href = "isletme-giris.html";
@@ -7,7 +7,7 @@ if (!kullanici || kullanici.rol !== "isletme" || !kullanici.token) {
 document.getElementById("isletme-basligi").textContent = `Merhaba, ${kullanici.ad_soyad}`;
 
 document.getElementById("cikis-btn").addEventListener("click", () => {
-  localStorage.removeItem("carevo_kullanici");
+  localStorage.removeItem("carevo_kullanici_isletme");
 
   const mesaj = document.createElement("div");
   mesaj.textContent = "Panelden çıkış yapılmıştır.";
@@ -31,7 +31,7 @@ async function korumaliFetch(url, secenekler = {}) {
   });
 
   if (yanit.status === 401) {
-    localStorage.removeItem("carevo_kullanici");
+    localStorage.removeItem("carevo_kullanici_isletme");
     window.location.href = "isletme-giris.html";
     throw new Error("Yetkisiz");
   }
@@ -52,9 +52,36 @@ async function baslat() {
   isletme = await yanit.json();
   document.getElementById("isletme-basligi").textContent = isletme.isletme_adi;
   document.getElementById("randevu-bolumu").classList.remove("gizli");
+  document.getElementById("profil-isletme-adi").value = isletme.isletme_adi;
+  document.getElementById("profil-adres").value = isletme.adres || "";
+  document.getElementById("profil-aciklama").value = isletme.aciklama || "";
   hizmetleriYukle();
   randevulariYukle();
 }
+
+// Isletme profilini duzenleme formu
+document.getElementById("profil-duzenle-formu").addEventListener("submit", async (olay) => {
+  olay.preventDefault();
+
+  const yanit = await korumaliFetch(`/api/isletmeler/${isletme.id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      isletme_adi: document.getElementById("profil-isletme-adi").value,
+      adres: document.getElementById("profil-adres").value,
+      aciklama: document.getElementById("profil-aciklama").value,
+    }),
+  });
+
+  if (yanit.ok) {
+    isletme = await yanit.json();
+    document.getElementById("isletme-basligi").textContent = isletme.isletme_adi;
+
+    const mesaj = document.getElementById("profil-guncelleme-mesaji");
+    mesaj.classList.remove("gizli");
+    setTimeout(() => mesaj.classList.add("gizli"), 2500);
+  }
+});
 
 async function hizmetleriYukle() {
   const yanit = await korumaliFetch(`/api/isletmeler/${isletme.id}/hizmetler`);
@@ -65,7 +92,7 @@ async function hizmetleriYukle() {
     .map(
       (h) => `
       <tr data-id="${h.id}">
-        <td>${h.ad}</td>
+        <td>${kacir(h.ad)}</td>
         <td>${h.fiyat} TL</td>
         <td>${h.tahmini_sure_dk ? h.tahmini_sure_dk + " dk" : "-"}</td>
         <td><button class="eylem-btn hizmet-sil-btn" data-id="${h.id}">Sil</button></td>
@@ -142,12 +169,12 @@ async function randevulariYukle() {
     const konumMetni = r.konum_turu === "musteri_adresi" ? "Ekip Gidecek" : "Dükkana Gelecek";
 
     satir.innerHTML = `
-      <td>${r.musteri_adi}</td>
-      <td>${r.musteri_telefon || "-"}</td>
-      <td>${r.hizmet_adi}</td>
-      <td>${r.arac_bilgisi}</td>
+      <td>${kacir(r.musteri_adi)}</td>
+      <td>${kacir(r.musteri_telefon) || "-"}</td>
+      <td>${kacir(r.hizmet_adi)}</td>
+      <td>${kacir(r.arac_bilgisi)}</td>
       <td>${tarih}</td>
-      <td>${konumMetni}${r.musteri_adresi ? " (" + r.musteri_adresi + ")" : ""}</td>
+      <td>${konumMetni}${r.musteri_adresi ? " (" + kacir(r.musteri_adresi) + ")" : ""}</td>
       <td>${r.ucret} TL</td>
       <td><span class="durum durum-${r.durum}">${r.durum}</span></td>
       <td>${r.odeme_durumu}</td>

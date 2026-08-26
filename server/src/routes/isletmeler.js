@@ -30,6 +30,31 @@ router.post("/", rolGerekli("isletme"), async (req, res) => {
   }
 });
 
+// Isletme profilini guncelle (sadece o isletmenin sahibi)
+router.patch("/:id", rolGerekli("isletme"), async (req, res) => {
+  const { isletme_adi, adres, aciklama } = req.body;
+
+  if (!isletme_adi) {
+    return res.status(400).json({ hata: "isletme_adi zorunludur" });
+  }
+
+  try {
+    const sonuc = await pool.query(
+      `UPDATE isletmeler SET isletme_adi = $1, adres = $2, aciklama = $3
+       WHERE id = $4 AND kullanici_id = $5
+       RETURNING *`,
+      [isletme_adi, adres || null, aciklama || null, req.params.id, req.kullanici.id]
+    );
+    if (!sonuc.rows[0]) {
+      return res.status(403).json({ hata: "Bu isletme size ait degil" });
+    }
+    res.json(sonuc.rows[0]);
+  } catch (hata) {
+    console.error(hata);
+    res.status(500).json({ hata: "Sunucu hatasi" });
+  }
+});
+
 // Giris yapmis isletme sahibinin kendi profilini bul (panel girisinde kullanilir)
 router.get("/kullanici/:kullaniciId", rolGerekli("isletme"), async (req, res) => {
   if (Number(req.params.kullaniciId) !== req.kullanici.id) {

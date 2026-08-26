@@ -1,4 +1,4 @@
-const kullanici = JSON.parse(localStorage.getItem("carevo_kullanici") || "null");
+const kullanici = JSON.parse(localStorage.getItem("carevo_kullanici_musteri") || "null");
 
 if (!kullanici || kullanici.rol !== "musteri" || !kullanici.token) {
   window.location.href = "musteri-giris.html";
@@ -7,7 +7,7 @@ if (!kullanici || kullanici.rol !== "musteri" || !kullanici.token) {
 document.getElementById("musteri-basligi").textContent = `Merhaba, ${kullanici.ad_soyad}`;
 
 document.getElementById("cikis-btn").addEventListener("click", () => {
-  localStorage.removeItem("carevo_kullanici");
+  localStorage.removeItem("carevo_kullanici_musteri");
 
   const mesaj = document.createElement("div");
   mesaj.textContent = "Panelden çıkış yapılmıştır.";
@@ -31,7 +31,7 @@ async function korumaliFetch(url, secenekler = {}) {
   });
 
   if (yanit.status === 401) {
-    localStorage.removeItem("carevo_kullanici");
+    localStorage.removeItem("carevo_kullanici_musteri");
     window.location.href = "musteri-giris.html";
     throw new Error("Yetkisiz");
   }
@@ -45,6 +45,10 @@ const konumTuru = document.getElementById("konum-turu");
 const adresAlani = document.getElementById("adres-alani");
 const musteriAdresi = document.getElementById("musteri-adresi");
 const formMesaji = document.getElementById("form-mesaji");
+const tarihSaatInput = document.getElementById("tarih-saat");
+
+// Gecmis bir tarih/saat secilememesi icin minimum degeri "su an" yapiyoruz
+tarihSaatInput.min = new Date().toISOString().slice(0, 16);
 
 // 1) Isletmeleri secim kutusuna doldur
 async function isletmeleriYukle() {
@@ -75,7 +79,7 @@ isletmeSecim.addEventListener("change", async () => {
   hizmetler.forEach((h) => {
     const secenek = document.createElement("option");
     secenek.value = h.id;
-    secenek.textContent = `${h.ad} - ${h.fiyat} TL`;
+    secenek.textContent = `${h.ad} - ${h.fiyat} TL${h.tahmini_sure_dk ? ` (${h.tahmini_sure_dk} dk)` : ""}`;
     hizmetSecim.appendChild(secenek);
   });
 });
@@ -139,9 +143,9 @@ async function randevulariYukle() {
     const iptalEdilebilir = !["iptal", "tamamlandi"].includes(r.durum);
 
     satir.innerHTML = `
-      <td>${r.isletme_adi}</td>
-      <td>${r.hizmet_adi}</td>
-      <td>${r.arac_bilgisi}</td>
+      <td>${kacir(r.isletme_adi)}</td>
+      <td>${kacir(r.hizmet_adi)}</td>
+      <td>${kacir(r.arac_bilgisi)}</td>
       <td>${tarih}</td>
       <td>${konumMetni}</td>
       <td>${r.ucret} TL</td>

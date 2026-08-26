@@ -56,6 +56,24 @@
     <!-- Isletme profili varsa hizmet yonetimi ve randevu tablosu -->
     <div id="randevu-bolumu" class="gizli">
       <div class="kutu" style="margin:0 0 30px 0;">
+        <h1>İşletme Profili</h1>
+
+        <form id="profil-duzenle-formu">
+          <label for="profil-isletme-adi">İşletme Adı</label>
+          <input type="text" id="profil-isletme-adi" required>
+
+          <label for="profil-adres">Adres</label>
+          <input type="text" id="profil-adres">
+
+          <label for="profil-aciklama">Açıklama</label>
+          <input type="text" id="profil-aciklama">
+
+          <button type="submit" class="btn-birincil" style="width:100%; margin-top:18px;">Profili Güncelle</button>
+        </form>
+        <p id="profil-guncelleme-mesaji" class="gizli" style="margin-top:10px; font-size:13px; color:#7fb0ff;">Profil güncellendi.</p>
+      </div>
+
+      <div class="kutu" style="margin:0 0 30px 0;">
         <h1>Hizmetlerim</h1>
 
         <form id="hizmet-formu" style="display:flex; gap:10px; flex-wrap:wrap; align-items:flex-end;">
@@ -71,7 +89,7 @@
             <label for="hizmet-sure">Süre (dk)</label>
             <input type="number" id="hizmet-sure" min="0" placeholder="Opsiyonel">
           </div>
-          <button type="submit" style="height:42px;">Hizmet Ekle</button>
+          <button type="submit" class="btn-birincil" style="height:42px; margin-top:0;">Hizmet Ekle</button>
         </form>
 
         <table style="margin-top:20px;">
@@ -109,6 +127,7 @@
     </div>
   </div>
 
+  <script src="js/guvenlik.js"></script>
   <script src="js/isletme-panel.js"></script>
   <script src="js/whatsapp-widget.js"></script>
 </body>

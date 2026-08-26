@@ -46,17 +46,23 @@ input, select {
 
 button {
   margin-top: 18px;
-  padding: 10px 16px;
+  padding: 10px 18px;
   background: #16233f;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 button:hover {
   background: #0d1626;
+}
+
+button:active {
+  transform: scale(0.98);
 }
 
 .hata {
@@ -77,10 +83,12 @@ table {
   border-collapse: collapse;
   background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 th, td {
-  padding: 10px;
+  padding: 12px 10px;
   border-bottom: 1px solid #eee;
   text-align: left;
   font-size: 13px;
@@ -89,6 +97,18 @@ th, td {
 th {
   background: #16233f;
   color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  font-size: 11px;
+}
+
+tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+tbody tr:hover {
+  background: rgba(127, 176, 255, 0.08);
 }
 
 .durum {
@@ -105,8 +125,9 @@ th {
 
 .eylem-btn {
   margin: 2px;
-  padding: 5px 8px;
+  padding: 6px 10px;
   font-size: 12px;
+  border-radius: 6px;
 }
 
 .gizli {

@@ -30,8 +30,11 @@ form.addEventListener("submit", async (olay) => {
       return;
     }
 
-    // token dahil tum bilgiyi saklıyoruz; panel sayfası her istekte bu token'ı gonderecek
-    localStorage.setItem("carevo_kullanici", JSON.stringify(kullanici));
+    // token dahil tum bilgiyi saklıyoruz; panel sayfası her istekte bu token'ı gonderecek.
+    // Rol'e ozel anahtar kullaniyoruz ki farkli rollerle ayni tarayicida
+    // acilan farkli sekmeler birbirinin oturumunu silmesin
+    localStorage.setItem("carevo_kullanici_admin", JSON.stringify(kullanici));
+    localStorage.setItem("carevo_son_rol", "admin");
     window.location.href = "admin-panel.html";
   } catch (hata) {
     hataMesaji.textContent = "Sunucuya baglanilamadi";

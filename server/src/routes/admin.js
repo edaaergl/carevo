@@ -1,4 +1,5 @@
 const express = require("express");
+const bcrypt = require("bcryptjs");
 const pool = require("../db");
 const { girisGerekli, rolGerekli } = require("../middleware/auth");
 
@@ -72,6 +73,30 @@ router.patch("/kullanicilar/:id/durum", async (req, res) => {
       `UPDATE kullanicilar SET aktif = $1 WHERE id = $2 AND rol != 'admin'
        RETURNING id, ad_soyad, email, telefon, rol, aktif, olusturulma_tarihi`,
       [aktif, req.params.id]
+    );
+    if (!sonuc.rows[0]) {
+      return res.status(404).json({ hata: "Kullanici bulunamadi" });
+    }
+    res.json(sonuc.rows[0]);
+  } catch (hata) {
+    console.error(hata);
+    res.status(500).json({ hata: "Sunucu hatasi" });
+  }
+});
+
+// Bir kullanicinin sifresini yeniden belirle (kullanici sifresini unuttugunda admin mudahalesi)
+router.patch("/kullanicilar/:id/sifre", async (req, res) => {
+  const { sifre } = req.body;
+  if (!sifre || sifre.length < 6) {
+    return res.status(400).json({ hata: "sifre en az 6 karakter olmalidir" });
+  }
+
+  try {
+    const sifreHash = await bcrypt.hash(sifre, 10);
+    const sonuc = await pool.query(
+      `UPDATE kullanicilar SET sifre_hash = $1 WHERE id = $2 AND rol != 'admin'
+       RETURNING id, ad_soyad, email, rol`,
+      [sifreHash, req.params.id]
     );
     if (!sonuc.rows[0]) {
       return res.status(404).json({ hata: "Kullanici bulunamadi" });

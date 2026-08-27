@@ -134,6 +134,41 @@ tbody tr:hover {
   display: none;
 }
 
+.bolum-baslik {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 17px;
+  margin: 0 0 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 16px;
+}
+
+@media (max-width: 640px) {
+  .form-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bos-durum {
+  text-align: center;
+  padding: 36px 20px;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+.bos-durum .simge {
+  display: block;
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+
 .tam-genislik {
   width: 100vw;
   position: relative;

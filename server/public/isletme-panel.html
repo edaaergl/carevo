@@ -7,6 +7,8 @@
   <style>
     body { color: #e5e7eb; }
     .kutu {
+      max-width: none;
+      margin: 0 0 24px;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.1);
       box-shadow: none;
@@ -41,7 +43,7 @@
 
     <!-- Henuz isletme profili yoksa gosterilecek form -->
     <div id="profil-olustur-bolumu" class="kutu gizli">
-      <h1>İşletme Profilini Tamamla</h1>
+      <h2 class="bolum-baslik">🏢 İşletme Profilini Tamamla</h2>
       <form id="profil-formu">
         <label for="isletme_adi">İşletme Adı</label>
         <input type="text" id="isletme_adi" required>
@@ -56,14 +58,19 @@
     <!-- Isletme profili varsa hizmet yonetimi ve randevu tablosu -->
     <div id="randevu-bolumu" class="gizli">
       <div class="kutu" style="margin:0 0 30px 0;">
-        <h1>İşletme Profili</h1>
+        <h2 class="bolum-baslik">🏢 İşletme Profili</h2>
 
         <form id="profil-duzenle-formu">
-          <label for="profil-isletme-adi">İşletme Adı</label>
-          <input type="text" id="profil-isletme-adi" required>
-
-          <label for="profil-adres">Adres</label>
-          <input type="text" id="profil-adres">
+          <div class="form-grid-2">
+            <div>
+              <label for="profil-isletme-adi">İşletme Adı</label>
+              <input type="text" id="profil-isletme-adi" required>
+            </div>
+            <div>
+              <label for="profil-adres">Adres</label>
+              <input type="text" id="profil-adres">
+            </div>
+          </div>
 
           <label for="profil-aciklama">Açıklama</label>
           <input type="text" id="profil-aciklama">
@@ -74,7 +81,7 @@
       </div>
 
       <div class="kutu" style="margin:0 0 30px 0;">
-        <h1>Hizmetlerim</h1>
+        <h2 class="bolum-baslik">🧾 Hizmetlerim</h2>
 
         <form id="hizmet-formu" style="display:flex; gap:10px; flex-wrap:wrap; align-items:flex-end;">
           <div style="flex:1; min-width:180px;">
@@ -106,24 +113,30 @@
         <p id="hizmet-bos-mesaji" class="gizli" style="margin-top:10px; font-size:13px; color:#9ca3af;">Henüz hizmet eklemediniz.</p>
       </div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Müşteri</th>
-            <th>Telefon</th>
-            <th>Hizmet</th>
-            <th>Araç</th>
-            <th>Tarih / Saat</th>
-            <th>Konum</th>
-            <th>Ücret</th>
-            <th>Durum</th>
-            <th>Ödeme</th>
-            <th>İşlemler</th>
-          </tr>
-        </thead>
-        <tbody id="randevu-govde"></tbody>
-      </table>
-      <p id="bos-mesaji" class="gizli">Henüz randevu yok.</p>
+      <div class="kutu">
+        <h2 class="bolum-baslik">📋 Gelen Randevular</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Müşteri</th>
+              <th>Telefon</th>
+              <th>Hizmet</th>
+              <th>Araç</th>
+              <th>Tarih / Saat</th>
+              <th>Konum</th>
+              <th>Ücret</th>
+              <th>Durum</th>
+              <th>Ödeme</th>
+              <th>İşlemler</th>
+            </tr>
+          </thead>
+          <tbody id="randevu-govde"></tbody>
+        </table>
+        <div id="bos-mesaji" class="bos-durum gizli">
+          <span class="simge">📭</span>
+          Henüz randevu yok.
+        </div>
+      </div>
     </div>
   </div>
 

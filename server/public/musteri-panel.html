@@ -7,6 +7,8 @@
   <style>
     body { color: #e5e7eb; }
     .kutu {
+      max-width: none;
+      margin: 0 0 24px;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.1);
       box-shadow: none;
@@ -39,8 +41,8 @@
       </div>
     </div>
 
-    <div class="kutu" style="margin:0 0 30px 0;">
-      <h1>Yeni Randevu Oluştur</h1>
+    <div class="kutu">
+      <h2 class="bolum-baslik">📅 Yeni Randevu Oluştur</h2>
 
       <form id="randevu-formu">
         <label for="isletme-secim">İşletme</label>
@@ -53,8 +55,16 @@
           <option value="">Önce işletme seçin</option>
         </select>
 
-        <label for="arac-bilgisi">Araç Marka / Model</label>
-        <input type="text" id="arac-bilgisi" placeholder="Örn. Toyota Corolla" required>
+        <div class="form-grid-2">
+          <div>
+            <label for="arac-bilgisi">Araç Marka / Model</label>
+            <input type="text" id="arac-bilgisi" placeholder="Örn. Toyota Corolla" required>
+          </div>
+          <div>
+            <label for="tarih-saat">Tarih / Saat</label>
+            <input type="datetime-local" id="tarih-saat" required>
+          </div>
+        </div>
 
         <label for="konum-turu">Nasıl istersiniz?</label>
         <select id="konum-turu" required>
@@ -67,33 +77,35 @@
           <input type="text" id="musteri-adresi">
         </div>
 
-        <label for="tarih-saat">Tarih / Saat</label>
-        <input type="datetime-local" id="tarih-saat" required>
-
         <button type="submit" class="btn-birincil">Randevu Oluştur</button>
       </form>
 
       <p id="form-mesaji" class="hata gizli"></p>
     </div>
 
-    <h1>Randevularım</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>İşletme</th>
-          <th>Hizmet</th>
-          <th>Araç</th>
-          <th>Tarih / Saat</th>
-          <th>Konum</th>
-          <th>Ücret</th>
-          <th>Durum</th>
-          <th>Ödeme</th>
-          <th>İşlemler</th>
-        </tr>
-      </thead>
-      <tbody id="randevu-govde"></tbody>
-    </table>
-    <p id="bos-mesaji" class="gizli">Henüz randevunuz yok.</p>
+    <div class="kutu">
+      <h2 class="bolum-baslik">📋 Randevularım</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>İşletme</th>
+            <th>Hizmet</th>
+            <th>Araç</th>
+            <th>Tarih / Saat</th>
+            <th>Konum</th>
+            <th>Ücret</th>
+            <th>Durum</th>
+            <th>Ödeme</th>
+            <th>İşlemler</th>
+          </tr>
+        </thead>
+        <tbody id="randevu-govde"></tbody>
+      </table>
+      <div id="bos-mesaji" class="bos-durum gizli">
+        <span class="simge">📭</span>
+        Henüz randevunuz yok.
+      </div>
+    </div>
   </div>
 
   <script src="js/guvenlik.js"></script>

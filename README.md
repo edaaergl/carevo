@@ -59,7 +59,7 @@ server/
 1. PostgreSQL'de bir veritabanı oluşturun ve `server/sql/schema.sql` dosyasını çalıştırın.
 2. `server/` klasöründe bir `.env` dosyası oluşturun:
    ```
-   PORT=3000
+   PORT=3001
    DB_HOST=127.0.0.1
    DB_PORT=5432
    DB_NAME=carevo
@@ -73,7 +73,7 @@ server/
    npm install
    npm run dev
    ```
-4. Tarayıcıdan `http://localhost:3000` adresine gidin.
+4. Tarayıcıdan `http://localhost:3001` adresine gidin.
 
 Admin hesabı `kullanicilar` tablosuna elle eklenir (kayıt formu sadece müşteri/işletme rolünü destekler); `rol` alanını `'admin'` olarak, şifreyi bcrypt hash'i olarak girin.
 
